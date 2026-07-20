@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aden Eats — marketing site
 
-## Getting Started
+Phase 1 marketing site for [adeneats.com](https://adeneats.com). Next.js
+(App Router) + TypeScript + Tailwind CSS v4 + Framer Motion, deployed on
+Vercel. Talks to Supabase only to insert into `public.launch_waitlist` —
+there is no ordering flow yet (that's Phase 2).
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in the Supabase values, see below
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See `.env.example`.
 
-## Learn More
+| Variable                        | Used                                    | Required to run locally |
+| -------------------------------- | ---------------------------------------- | ------------------------ |
+| `NEXT_PUBLIC_SUPABASE_URL`       | client-side, waitlist insert             | yes                      |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | client-side, waitlist insert             | yes                      |
+| `APP_STORE_URL`                  | server-rendered into "Get the app" links | no — falls back to the waitlist form until it's set |
 
-To learn more about Next.js, take a look at the following resources:
+## Supabase setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`public.launch_waitlist` does not exist yet in the project as of 2026-07-19.
+Run `supabase/launch_waitlist.sql` once, in full, in the Supabase SQL
+editor. It creates the table and an RLS policy that allows the anon key to
+`INSERT` only — no read/update/delete access. If the table has since been
+created by another process (e.g. the app team's own waitlist work), don't
+run the `CREATE TABLE` statement against it — ask for `ALTER TABLE`
+statements instead so the two don't drift.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploying (Vercel)
 
-## Deploy on Vercel
+1. Import this repo into Vercel.
+2. Framework preset: Next.js (auto-detected). No build command overrides
+   needed.
+3. Add the three environment variables above in Project Settings →
+   Environment Variables (all three, for Production/Preview/Development as
+   appropriate).
+4. `vercel.json` sets baseline security response headers
+   (`X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) — no
+   other Vercel config is required for this app.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Custom domain (adeneats.com)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Vercel dashboard → Project → Settings → Domains → add `adeneats.com`
+   and `www.adeneats.com`.
+2. At your DNS provider, point:
+   - `adeneats.com` → `A` record to `76.76.21.21` (Vercel's anycast IP —
+     confirm the current value shown in the Vercel dashboard, it's
+     occasionally updated).
+   - `www.adeneats.com` → `CNAME` to `cname.vercel-dns.com`.
+3. Set the apex (`adeneats.com`) as the primary domain and redirect `www`
+   to it (or vice versa — pick one canonical host) from the same Domains
+   screen.
+4. Vercel provisions and renews the TLS certificate automatically once DNS
+   resolves — no manual certificate steps.
+
+## Photography needed
+
+Every photo panel on the site is currently a styled color placeholder with
+a caption (never a stock photo of non-Ethiopian food). Replace them with
+real photography, ideally in this order:
+
+1. Hero — table spread, shot from above (`components/Hero.tsx`)
+2. Hands tearing injera (candidate for the "How it works" section)
+3. Buna (coffee ceremony) — candidate for future storytelling content
+4. Cook portrait (`components/CookTeaser.tsx`, and repeated on `/cooks`)
+5. Dish close-ups, one per entry in `data/dishes.ts` (Doro Wat, Kitfo,
+   Beyaynetu, Awaze Tibs, Shiro Wat, Gomen — 6 shots)
+
+When photography lands, swap the gradient `<div>` placeholders for
+`next/image`, and update `data/dishes.ts` with an `image` field per dish.
+
+## Project structure notes for Phase 2
+
+Routes and components are split by page (`app/`, `app/cooks/`) rather than
+folded into one monolith, specifically so an `/order` flow can be added
+later without restructuring what's here. Nothing for ordering has been
+built yet.
+
+## Copy decisions
+
+See `COPY.md` for the headline options considered and why the current one
+was chosen, plus notes on the Amharic accent text used across the site.

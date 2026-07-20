@@ -1,0 +1,54 @@
+/*
+  Aden Eats — design tokens.
+  Every color and type value used on the site is named here first.
+  Components reference these tokens (bg-teff, text-injera-dim,
+  font-display, text-hero, etc.) — never a raw hex or font stack inline.
+
+  Direction: deep teff-brown runs the whole page (not just the hero) —
+  see adeneats-mockup.html, approved 2026-07-19.
+*/
+
+@theme {
+  /* ---------- Anchor brand colors (named once; everything else derives from these) ---------- */
+  --color-teff: #231812;        /* deep roasted brown — page background, nearly every section */
+  --color-injera: #f5ebdc;      /* injera cream — primary text on dark */
+  --color-teal: #1d9e75;        /* brand teal — primary buttons, links, "cook" accents */
+  --color-teal-deep: #0f6b4e;   /* gradient stops, deep hover state */
+  --color-berbere: #c43b1e;     /* berbere red-orange — spice/heat accent, dish photo treatments */
+  --color-gold: #e2a93b;        /* niter kibbeh gold — tibeb pattern, fidel accents, cook CTA */
+
+  /* ---------- Derived shades ---------- */
+  --color-teff-panel: #2e211a;    /* raised card / alternating section panel */
+  --color-teff-panel-2: #1c120d;  /* deepest panel, dishes-section gradient */
+  --color-injera-dim: #cbb8a4;    /* muted cream — secondary text, captions */
+  --color-berbere-deep: #7a2412;  /* dish photo gradient stop */
+  --color-gold-deep: #8a5a16;     /* dish photo gradient stop */
+  --color-border: rgb(245 235 220 / 0.1);    /* hairline borders on dark panels */
+  --color-teal-tint: rgb(29 158 117 / 0.16); /* icon chip bg */
+  --color-berbere-tint: rgb(196 59 30 / 0.16);
+  --color-gold-tint: rgb(226 169 59 / 0.16);
+
+  /* ---------- Type families ---------- */
+  --font-display: var(--font-display), Georgia, serif;        /* Fraunces — hero, section titles, dish names */
+  --font-body: var(--font-body), system-ui, sans-serif;        /* Work Sans — everything else */
+  --font-ethiopic: var(--font-ethiopic), serif;                 /* Noto Serif Ethiopic — Fidel accents only */
+
+  /* ---------- Display type scale (Fraunces) ---------- */
+  --text-hero: 3rem;            /* mobile hero headline; scales up via responsive classes */
+  --text-hero--line-height: 1.08;
+  --text-display-lg: 2.25rem;   /* section titles ("The dishes", "For cooks") */
+  --text-display-lg--line-height: 1.15;
+  --text-display-md: 1.5rem;    /* card titles, dish names */
+  --text-display-md--line-height: 1.25;
+
+  /* ---------- Layout ---------- */
+  --container-max: 70rem;   /* 1120px */
+  --spacing-section: 6rem;  /* vertical section padding */
+  --radius-card: 1.125rem;  /* dish cards, steps */
+  --radius-panel: 1.75rem;  /* cooks panel */
+
+  /* ---------- Motion ---------- */
+  --ease-aden: cubic-bezier(0.22, 1, 0.36, 1); /* soft settle — used for all scroll/hover motion */
+  --duration-hero: 1.4s;     /* page-load sequence budget */
+  --duration-reveal: 350ms;  /* scroll reveal, within the 200–400ms budget */
+}

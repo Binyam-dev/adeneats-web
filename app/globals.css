@@ -1,26 +1,37 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* No prefers-color-scheme switching — this is a fixed brand identity
+   (deep teff-brown throughout), not a themeable app surface. */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+/* Amharic accents use the Ethiopic face explicitly via className="font-ethiopic" —
+   never inherited into surrounding Latin text. */
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-teff);
+}
+
+/* Explicit, on-brand focus ring — the default browser outline reads poorly
+   against this dark, saturated palette, so keyboard focus gets a visible
+   gold ring everywhere instead of relying per-component on the UA default. */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
