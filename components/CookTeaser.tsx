@@ -1,6 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import { publicImageExists } from "@/lib/media";
+
+const COOK_PORTRAIT = "/images/cooks/portrait.jpg";
 
 const stats = [
   { value: "85%", label: "of every order is yours" },
@@ -56,12 +60,24 @@ export default function CookTeaser() {
             </div>
 
             <div className="rounded-[var(--radius-card)] border border-injera/10 bg-teff/75 p-7">
-              <div
-                aria-hidden="true"
-                className="mb-5 flex h-30 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#3a2a20,#5c4230)] text-center text-[0.62rem] uppercase tracking-[0.14em] text-injera/50"
-              >
-                Photo: cook portrait
-              </div>
+              {publicImageExists(COOK_PORTRAIT) ? (
+                <div className="relative mb-5 h-30 overflow-hidden rounded-2xl">
+                  <Image
+                    src={COOK_PORTRAIT}
+                    alt="An Aden Eats cook"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 30vw, 90vw"
+                  />
+                </div>
+              ) : (
+                <div
+                  aria-hidden="true"
+                  className="mb-5 flex h-30 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#3a2a20,#5c4230)] text-center text-[0.62rem] uppercase tracking-[0.14em] text-injera/50"
+                >
+                  Photo: cook portrait
+                </div>
+              )}
               <p className="text-[0.92rem] italic text-injera-dim">
                 &quot;I&apos;ve been making doro wat for my family for twenty
                 years. Now my neighborhood gets to taste it too — and it

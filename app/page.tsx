@@ -5,6 +5,9 @@ import DishGrid from "@/components/DishGrid";
 import CookTeaser from "@/components/CookTeaser";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
+import { publicImageExists } from "@/lib/media";
+
+const HERO_IMAGE = "/images/hero.jpg";
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -32,7 +35,10 @@ export default function Home() {
       />
       <Nav appStoreUrl={appStoreUrl} />
       <main className="flex-1">
-        <Hero appStoreUrl={appStoreUrl} />
+        <Hero
+          appStoreUrl={appStoreUrl}
+          heroImage={publicImageExists(HERO_IMAGE) ? HERO_IMAGE : undefined}
+        />
         <HowItWorks />
         <DishGrid />
         <CookTeaser />

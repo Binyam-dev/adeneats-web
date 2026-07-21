@@ -65,18 +65,22 @@ re-running the `CREATE TABLE` statement.
 ## Photography needed
 
 Every photo panel on the site is currently a styled color placeholder with
-a caption (never a stock photo of non-Ethiopian food). Replace them with
-real photography, ideally in this order:
+a caption (never a stock photo of non-Ethiopian food). The Hero, dish
+grid, and cook portrait panels already check for a real file at a fixed
+path (`lib/media.ts`'s `publicImageExists`) and swap in `next/image`
+automatically — **no code changes needed**, just drop the file in. Ideal
+shot order:
 
-1. Hero — table spread, shot from above (`components/Hero.tsx`)
-2. Hands tearing injera (candidate for the "How it works" section)
-3. Buna (coffee ceremony) — candidate for future storytelling content
+1. Hero — table spread, shot from above → `public/images/hero.jpg`
+2. Hands tearing injera (candidate for the "How it works" section — not
+   wired up yet)
+3. Buna (coffee ceremony) — candidate for future storytelling content —
+   not wired up yet
 4. Cook portrait (`components/CookTeaser.tsx`, and repeated on `/cooks`)
+   → `public/images/cooks/portrait.jpg`
 5. Dish close-ups, one per entry in `data/dishes.ts` (Doro Wat, Kitfo,
-   Beyaynetu, Awaze Tibs, Shiro Wat, Gomen — 6 shots)
-
-When photography lands, swap the gradient `<div>` placeholders for
-`next/image`, and update `data/dishes.ts` with an `image` field per dish.
+   Beyaynetu, Awaze Tibs, Shiro Wat, Gomen — 6 shots) →
+   `public/images/dishes/<slug>.jpg`, e.g. `public/images/dishes/doro-wat.jpg`
 
 ## Project structure notes for Phase 2
 
