@@ -27,6 +27,12 @@ export default function Nav({ appStoreUrl }: { appStoreUrl?: string }) {
               The dishes
             </Link>
             <Link
+              href="/order"
+              className="hidden text-sm text-injera-dim transition-colors hover:text-injera sm:inline"
+            >
+              Order
+            </Link>
+            <Link
               href="/cooks"
               className="hidden text-sm text-injera-dim transition-colors hover:text-injera sm:inline"
             >

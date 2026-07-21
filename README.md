@@ -86,8 +86,37 @@ shot order:
 
 Routes and components are split by page (`app/`, `app/cooks/`) rather than
 folded into one monolith, specifically so an `/order` flow can be added
-later without restructuring what's here. Nothing for ordering has been
-built yet.
+later without restructuring what's here.
+
+## Ordering data (Phase 2, slice 1)
+
+`/order` is a **read-only preview** — no cart, checkout, or payments. The
+site's own copy already positions the app as where ordering and cook menu
+management happen ("manage your kitchen from the app"), so this slice only
+gives cook listings a home in Supabase and lets the website show them.
+
+**`public.cooks` already exists** in this Supabase project — confirmed
+2026-07-21 (the anon key gets `42501 permission denied` on it, not a
+missing-table error), almost certainly the mobile app's backend. Its schema
+is unknown from this repo. To avoid guessing at — or colliding with — a
+table another team owns, `/order` reads from a separate table,
+`public.cook_listings`, not `public.cooks`. Reconciling or merging the two
+is a follow-up once the app team's actual `cooks` schema is available; until
+then, treat `cook_listings` as this website's own preview data, not a
+mirror of the app's real cook records.
+
+Run `supabase/ordering.sql` once, in full, in the Supabase SQL editor. It
+creates `public.cook_listings` and `public.menu_items`, with RLS that lets
+the anon key `SELECT` published listings and their available items only —
+same insert/update/delete-denied-by-default pattern as `launch_waitlist.sql`.
+
+There's no admin UI yet, so listing/menu rows are entered manually
+(Supabase dashboard or SQL editor, which bypasses RLS via `service_role`)
+once a cook clears the vetting flow described on `/cooks`.
+
+Cart, checkout, payments, and cook/customer accounts are explicitly out of
+scope until there's a decision on whether any of that lives on the website
+at all, versus staying app-exclusive.
 
 ## Copy decisions
 
