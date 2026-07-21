@@ -27,13 +27,13 @@ See `.env.example`.
 
 ## Supabase setup
 
-`public.launch_waitlist` does not exist yet in the project as of 2026-07-19.
-Run `supabase/launch_waitlist.sql` once, in full, in the Supabase SQL
-editor. It creates the table and an RLS policy that allows the anon key to
-`INSERT` only — no read/update/delete access. If the table has since been
-created by another process (e.g. the app team's own waitlist work), don't
-run the `CREATE TABLE` statement against it — ask for `ALTER TABLE`
-statements instead so the two don't drift.
+`public.launch_waitlist` was created as of 2026-07-20 by running
+`supabase/launch_waitlist.sql` in the Supabase SQL editor. It creates the
+table and an RLS policy that allows the anon key to `INSERT` only — no
+read/update/delete access (confirmed: an anon-key `SELECT` correctly gets
+rejected with `42501 permission denied`, not a missing-table error). If
+you need to change the schema, use `ALTER TABLE` statements rather than
+re-running the `CREATE TABLE` statement.
 
 ## Deploying (Vercel)
 
