@@ -49,18 +49,26 @@ re-running the `CREATE TABLE` statement.
 
 ### Custom domain (adeneats.com)
 
-1. Vercel dashboard → Project → Settings → Domains → add `adeneats.com`
-   and `www.adeneats.com`.
-2. At your DNS provider, point:
-   - `adeneats.com` → `A` record to `76.76.21.21` (Vercel's anycast IP —
-     confirm the current value shown in the Vercel dashboard, it's
-     occasionally updated).
-   - `www.adeneats.com` → `CNAME` to `cname.vercel-dns.com`.
-3. Set the apex (`adeneats.com`) as the primary domain and redirect `www`
-   to it (or vice versa — pick one canonical host) from the same Domains
-   screen.
-4. Vercel provisions and renews the TLS certificate automatically once DNS
-   resolves — no manual certificate steps.
+Both `adeneats.com` and `www.adeneats.com` are attached to the
+`adeneats-web-okda` Vercel project (done 2026-07-21 via `vercel domains
+add`). That's only half the setup — the domain's nameservers are
+Cloudflare's (`lucy.ns.cloudflare.com` / `howard.ns.cloudflare.com`), so
+DNS itself is still managed in Cloudflare's dashboard, not this repo or
+Vercel. Confirmed intent (2026-07-21): point straight at Vercel, not
+proxied through Cloudflare. One of:
+
+- **Hand DNS to Vercel entirely (simplest):** at the registrar, change
+  the nameservers to `ns1.vercel-dns.com` and `ns2.vercel-dns.com`.
+- **Keep Cloudflare as DNS host:** in Cloudflare's DNS panel, set `@` and
+  `www` to `CNAME` records pointing at the target `vercel domains verify
+  adeneats.com` reports (it's signed per-request, so re-run rather than
+  hardcoding it here) — proxy status must be **DNS only** (grey cloud),
+  not proxied (orange cloud), or Vercel's TLS handshake fails.
+
+After either change, run `vercel domains verify adeneats.com` (and the
+`www` variant) to confirm — Vercel provisions and renews the TLS
+certificate automatically once verification passes, no manual
+certificate steps.
 
 ## Photography needed
 
