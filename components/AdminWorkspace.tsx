@@ -7,6 +7,16 @@ import type { CookListing } from "@/lib/order-types";
 import { formatPrice } from "@/lib/order-types";
 
 type ApiState = "idle" | "loading" | "ready" | "error";
+type WaitlistEntry = {
+  id: string;
+  name: string | null;
+  email: string;
+  city: string | null;
+  region: string | null;
+  role: "client" | "cook";
+  cuisine_specialty: string | null;
+  created_at: string;
+};
 
 export default function AdminWorkspace() {
   const [session, setSession] = useState<Session | null>(null);
@@ -14,6 +24,8 @@ export default function AdminWorkspace() {
   const [message, setMessage] = useState("");
   const [state, setState] = useState<ApiState>("idle");
   const [listings, setListings] = useState<CookListing[]>([]);
+  const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
+  const [waitlistState, setWaitlistState] = useState<ApiState>("idle");
 
   useEffect(() => {
     const supabase = getSupabase();
@@ -37,11 +49,27 @@ export default function AdminWorkspace() {
     setState("ready");
   }, [session]);
 
+  const loadWaitlist = useCallback(async (activeSession = session) => {
+    if (!activeSession) return;
+    setWaitlistState("loading");
+    const result = await adminFetch(activeSession, "/api/admin/waitlist");
+    if (!result.ok) {
+      setWaitlistState("error");
+      setMessage(result.message ?? "Waitlist data could not be loaded.");
+      return;
+    }
+    setWaitlist(result.entries as WaitlistEntry[]);
+    setWaitlistState("ready");
+  }, [session]);
+
   useEffect(() => {
     if (!session) return;
-    const frame = window.requestAnimationFrame(() => void loadListings(session));
+    const frame = window.requestAnimationFrame(() => {
+      void loadListings(session);
+      void loadWaitlist(session);
+    });
     return () => window.cancelAnimationFrame(frame);
-  }, [loadListings, session]);
+  }, [loadListings, loadWaitlist, session]);
 
   async function sendLink(event: React.FormEvent) {
     event.preventDefault();
@@ -82,6 +110,7 @@ export default function AdminWorkspace() {
         <button type="button" onClick={() => getSupabase().auth.signOut()} className="min-h-11 rounded-full border border-border px-5 text-sm text-injera">Sign out</button>
       </div>
       {state === "error" && <p role="alert" className="mt-6 rounded-2xl border border-error/30 bg-berbere-tint p-4 text-error">{message}</p>}
+      <WaitlistDirectory entries={waitlist} state={waitlistState} />
       <CreateListing session={session} onCreated={() => loadListings()} />
       <div className="mt-8 space-y-5">
         {state === "loading" ? (
@@ -114,6 +143,85 @@ export default function AdminWorkspace() {
         )}
       </div>
     </div>
+  );
+}
+
+function WaitlistDirectory({ entries, state }: { entries: WaitlistEntry[]; state: ApiState }) {
+  function exportCsv() {
+    const quote = (value: string | null) => `"${(value ?? "").replaceAll('"', '""')}"`;
+    const rows = [
+      ["Name", "Email", "City", "State or region", "Type", "Cuisine specialty", "Joined"],
+      ...entries.map((entry) => [
+        entry.name ?? "",
+        entry.email,
+        entry.city ?? "",
+        entry.region ?? "",
+        entry.role === "cook" ? "Cook" : "Customer",
+        entry.cuisine_specialty ?? "",
+        entry.created_at,
+      ]),
+    ];
+    const csv = rows.map((row) => row.map(quote).join(",")).join("\n");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `adeneats-waitlist-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return (
+    <section className="mt-8 overflow-hidden rounded-[var(--radius-panel)] border border-gold/20 bg-teff-panel">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border p-5 sm:p-6">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Community</p>
+          <h2 className="mt-1 font-display text-3xl text-injera">Waitlist · {entries.length}</h2>
+        </div>
+        <button type="button" disabled={!entries.length} onClick={exportCsv} className="min-h-11 rounded-full border border-gold px-5 text-sm font-semibold text-gold disabled:cursor-not-allowed disabled:opacity-40">
+          Export CSV
+        </button>
+      </div>
+      {state === "loading" || state === "idle" ? (
+        <p className="p-6 text-injera-dim">Loading waitlist…</p>
+      ) : state === "error" ? (
+        <p className="p-6 text-error">The waitlist could not be loaded.</p>
+      ) : entries.length === 0 ? (
+        <p className="p-6 text-injera-dim">No one has joined yet.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[760px] text-left text-sm">
+            <thead className="bg-injera/5 text-xs uppercase tracking-wider text-injera-dim">
+              <tr>
+                <th className="px-5 py-3 font-semibold">Name / email</th>
+                <th className="px-5 py-3 font-semibold">Location</th>
+                <th className="px-5 py-3 font-semibold">Type</th>
+                <th className="px-5 py-3 font-semibold">Joined</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {entries.map((entry) => (
+                <tr key={entry.id}>
+                  <td className="px-5 py-4">
+                    <span className="block font-medium text-injera">{entry.name || "Customer"}</span>
+                    <a className="text-teal hover:underline" href={`mailto:${entry.email}`}>{entry.email}</a>
+                  </td>
+                  <td className="px-5 py-4 text-injera-dim">
+                    {[entry.city, entry.region].filter(Boolean).join(", ") || "Not provided"}
+                  </td>
+                  <td className="px-5 py-4">
+                    <span className="rounded-full bg-teal-tint px-3 py-1 text-xs font-semibold capitalize text-teal">{entry.role}</span>
+                    {entry.cuisine_specialty && <span className="ml-2 text-injera-dim">{entry.cuisine_specialty}</span>}
+                  </td>
+                  <td className="px-5 py-4 text-injera-dim">
+                    {new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(new Date(entry.created_at))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
   );
 }
 

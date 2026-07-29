@@ -17,6 +17,7 @@ export function getWaitlistInsert(): WaitlistInsert | null {
       email: payload.email,
       normalized_email: payload.email,
       city: payload.city,
+      region: payload.region,
       role: payload.role,
       name: payload.name,
       cuisine_specialty: payload.cuisineSpecialty,

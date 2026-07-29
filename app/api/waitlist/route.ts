@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { validateWaitlistPayload, type WaitlistResponse } from "@/lib/waitlist";
 import { getWaitlistInsert } from "@/lib/waitlist-server";
 import { insertWaitlistEntry } from "@/lib/waitlist-service";
+import { sendWaitlistConfirmation } from "@/lib/waitlist-email";
 
 const JSON_TYPE = "application/json";
 const MAX_BODY_BYTES = 8_192;
@@ -88,8 +89,23 @@ export async function POST(request: NextRequest) {
   }
 
   const result = await insertWaitlistEntry(validated.data, getWaitlistInsert());
+  let responseResult: WaitlistResponse = result;
+  if (result.ok && result.status === "created") {
+    try {
+      const email = await sendWaitlistConfirmation(validated.data);
+      responseResult = {
+        ...result,
+        emailConfirmation: email.ok ? "sent" : "pending",
+      };
+    } catch (error) {
+      console.error("Waitlist confirmation email threw", {
+        name: error instanceof Error ? error.name : "UnknownError",
+      });
+      responseResult = { ...result, emailConfirmation: "pending" };
+    }
+  }
   return json(
-    result,
+    responseResult,
     result.ok
       ? 200
       : result.code === "VALIDATION_ERROR"

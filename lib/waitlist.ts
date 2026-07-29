@@ -3,17 +3,22 @@ export type WaitlistRole = "client" | "cook";
 export type WaitlistPayload = {
   email: string;
   city: string;
+  region: string;
   role: WaitlistRole;
   name: string | null;
   cuisineSpecialty: string | null;
   website: string;
 };
 
-export type WaitlistField = "email" | "city" | "name" | "cuisineSpecialty";
+export type WaitlistField = "email" | "city" | "region" | "name" | "cuisineSpecialty";
 export type WaitlistFieldErrors = Partial<Record<WaitlistField, string>>;
 
 export type WaitlistResponse =
-  | { ok: true; status: "created" | "existing" }
+  | {
+      ok: true;
+      status: "created" | "existing";
+      emailConfirmation?: "sent" | "pending";
+    }
   | {
       ok: false;
       code: "VALIDATION_ERROR" | "CONFIG_ERROR" | "DATABASE_ERROR";
@@ -24,6 +29,7 @@ export type WaitlistResponse =
 const MAX = {
   email: 254,
   city: 100,
+  region: 100,
   name: 100,
   cuisineSpecialty: 160,
 } as const;
@@ -49,6 +55,7 @@ export function validateWaitlistPayload(
   const raw = input as Record<string, unknown>;
   const email = normalizeText(raw.email).toLowerCase();
   const city = normalizeText(raw.city);
+  const region = normalizeText(raw.region);
   const name = normalizeText(raw.name);
   const cuisineSpecialty = normalizeText(raw.cuisineSpecialty);
   const website = normalizeText(raw.website);
@@ -65,6 +72,11 @@ export function validateWaitlistPayload(
     fieldErrors.city = "Enter your city.";
   } else if (city.length > MAX.city) {
     fieldErrors.city = `City must be ${MAX.city} characters or fewer.`;
+  }
+  if (!region) {
+    fieldErrors.region = "Enter your state or region.";
+  } else if (region.length > MAX.region) {
+    fieldErrors.region = `State or region must be ${MAX.region} characters or fewer.`;
   }
   if (role !== "client" && role !== "cook") {
     return { ok: false, fieldErrors };
@@ -88,6 +100,7 @@ export function validateWaitlistPayload(
     data: {
       email,
       city,
+      region,
       role,
       name: role === "cook" ? name : null,
       cuisineSpecialty:

@@ -25,6 +25,7 @@ See `.env.example`.
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | read-only public ordering preview         | yes                      |
 | `SUPABASE_SERVICE_ROLE_KEY`      | server-only waitlist insert route         | yes for waitlist         |
 | `ADMIN_EMAILS`                   | comma-separated `/admin` allowlist       | yes for admin            |
+| `RESEND_API_KEY`                 | waitlist confirmation emails              | yes for confirmation email |
 | `APP_STORE_URL`                  | server-rendered into "Get the app" links | no — falls back to the waitlist form until it's set |
 
 ## Supabase setup
@@ -34,6 +35,11 @@ is repeatable: it creates or updates the table, preserves the unique
 `(email, role)` rule, enables RLS, and removes the legacy anonymous insert
 policy. `POST /api/waitlist` validates submissions and writes with the
 server-only service-role key. Never expose that key in browser code.
+
+New signups receive an idempotent confirmation email from
+`Aden Eats <noreply@adeneats.com>` when `RESEND_API_KEY` is configured.
+Verify `adeneats.com` in Resend before enabling the key. An email-provider
+failure is logged but never removes a successfully saved waitlist entry.
 
 ## Deploying (Vercel)
 
@@ -109,8 +115,10 @@ same insert/update/delete-denied-by-default pattern as `launch_waitlist.sql`.
 
 The `/admin` kitchen desk uses Supabase passwordless email authentication.
 Every admin API call verifies the access token and requires the authenticated
-email to appear in the server-only `ADMIN_EMAILS` allowlist. Listings are
-created as drafts and can be published only by an authorized administrator.
+email to appear in the server-only `ADMIN_EMAILS` allowlist. It includes a
+private waitlist directory with names, emails, cities, states/regions, roles,
+signup dates, and CSV export. Listings are created as drafts and can be
+published only by an authorized administrator.
 Apply `supabase/ordering.sql` before using either marketplace or admin route.
 
 ## Copy decisions

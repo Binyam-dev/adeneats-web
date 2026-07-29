@@ -6,6 +6,7 @@ import { insertWaitlistEntry } from "../lib/waitlist-service.ts";
 const customer: WaitlistPayload = {
   email: "neighbor@example.com",
   city: "Silver Spring",
+  region: "Maryland",
   role: "client",
   name: null,
   cuisineSpecialty: null,
@@ -16,12 +17,14 @@ test("normalizes a valid customer submission", () => {
   const result = validateWaitlistPayload({
     email: "  Neighbor@Example.COM ",
     city: "  Silver   Spring ",
+    region: " Maryland ",
     role: "client",
   });
   assert.equal(result.ok, true);
   if (result.ok) {
     assert.equal(result.data.email, "neighbor@example.com");
     assert.equal(result.data.city, "Silver Spring");
+    assert.equal(result.data.region, "Maryland");
     assert.equal(result.data.name, null);
   }
 });
@@ -30,6 +33,7 @@ test("accepts and normalizes a valid cook submission", () => {
   const result = validateWaitlistPayload({
     email: "cook@example.com",
     city: "Alexandria",
+    region: "Virginia",
     role: "cook",
     name: "  Selam   Tesfaye ",
     cuisineSpecialty: " Doro wat ",
@@ -42,11 +46,12 @@ test("accepts and normalizes a valid cook submission", () => {
 });
 
 test("rejects missing required fields", () => {
-  const result = validateWaitlistPayload({ role: "cook", email: "", city: "" });
+  const result = validateWaitlistPayload({ role: "cook", email: "", city: "", region: "" });
   assert.equal(result.ok, false);
   if (!result.ok) {
     assert.ok(result.fieldErrors.email);
     assert.ok(result.fieldErrors.city);
+    assert.ok(result.fieldErrors.region);
     assert.ok(result.fieldErrors.name);
   }
 });
@@ -56,12 +61,14 @@ test("rejects invalid email and invalid role", () => {
     role: "client",
     email: "not-an-email",
     city: "DC",
+    region: "District of Columbia",
   });
   assert.equal(invalidEmail.ok, false);
   const invalidRole = validateWaitlistPayload({
     role: "admin",
     email: "valid@example.com",
     city: "DC",
+    region: "District of Columbia",
   });
   assert.equal(invalidRole.ok, false);
 });
@@ -71,6 +78,7 @@ test("rejects overlong input", () => {
     role: "client",
     email: "valid@example.com",
     city: "x".repeat(101),
+    region: "Maryland",
   });
   assert.equal(result.ok, false);
   if (!result.ok) assert.match(result.fieldErrors.city ?? "", /100/);

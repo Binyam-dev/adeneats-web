@@ -19,6 +19,7 @@ type Values = {
   name: string;
   email: string;
   city: string;
+  region: string;
   cuisineSpecialty: string;
   website: string;
 };
@@ -27,6 +28,7 @@ const initialValues: Values = {
   name: "",
   email: "",
   city: "",
+  region: "",
   cuisineSpecialty: "",
   website: "",
 };
@@ -46,6 +48,10 @@ function validateField(
   if (field === "city" && !normalized) return "Enter your city.";
   if (field === "city" && normalized.length > 100) {
     return "City must be 100 characters or fewer.";
+  }
+  if (field === "region" && !normalized) return "Enter your state or region.";
+  if (field === "region" && normalized.length > 100) {
+    return "State or region must be 100 characters or fewer.";
   }
   if (field === "name" && role === "cook" && !normalized) {
     return "Enter your name.";
@@ -89,8 +95,8 @@ export default function WaitlistForm({ role }: { role: WaitlistRole }) {
 
     const fields: WaitlistField[] =
       role === "cook"
-        ? ["name", "email", "city", "cuisineSpecialty"]
-        : ["email", "city"];
+        ? ["name", "email", "city", "region", "cuisineSpecialty"]
+        : ["email", "city", "region"];
     const nextErrors = Object.fromEntries(
       fields
         .map((field) => [field, validateField(field, values[field], role)] as const)
@@ -117,9 +123,11 @@ export default function WaitlistForm({ role }: { role: WaitlistRole }) {
         setMessage(
           result.status === "existing"
             ? "You're already on the list — we haven't forgotten you."
+            : result.emailConfirmation !== "sent"
+              ? "You're on the list. We'll email you when Aden Eats is live."
             : role === "cook"
-              ? "You're on the list. We'll reach out as onboarding opens in your city."
-              : "You're on the list. We'll let you know when Aden reaches your city.",
+              ? "You're on the list. Check your inbox for confirmation — we'll email you as onboarding opens."
+              : "You're on the list. Check your inbox for confirmation — we'll email you when Aden Eats is live.",
         );
         return;
       }
@@ -201,6 +209,15 @@ export default function WaitlistForm({ role }: { role: WaitlistRole }) {
           value={values.city}
           error={fieldErrors.city}
           autoComplete="address-level2"
+          onChange={update}
+          onBlur={handleBlur}
+        />
+        <Field
+          field="region"
+          label="State or region"
+          value={values.region}
+          error={fieldErrors.region}
+          autoComplete="address-level1"
           onChange={update}
           onBlur={handleBlur}
         />
