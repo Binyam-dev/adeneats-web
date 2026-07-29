@@ -15,7 +15,7 @@ const localBusinessJsonLd = {
   "@type": "LocalBusiness",
   name: "Aden Eats",
   description:
-    "A home-cooked Ethiopian and Eritrean food marketplace connecting vetted Habesha home cooks with neighbors across the DMV for pickup ordering.",
+    "A coming-soon Ethiopian and Eritrean food marketplace connecting vetted Habesha home cooks with neighbors across the DMV.",
   url: "https://adeneats.com",
   areaServed: [
     { "@type": "AdministrativeArea", name: "Washington, DC" },

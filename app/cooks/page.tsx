@@ -65,11 +65,9 @@ const faqs = [
 ];
 
 export default function CooksPage() {
-  const appStoreUrl = process.env.APP_STORE_URL;
-
   return (
     <>
-      <Nav appStoreUrl={appStoreUrl} />
+      <Nav />
 
       <main className="flex-1">
         <section className="py-20 sm:py-24">
@@ -228,12 +226,10 @@ export default function CooksPage() {
                 Coming soon to the App Store.
               </p>
               <Link
-                href={appStoreUrl || "#waitlist"}
-                target={appStoreUrl ? "_blank" : undefined}
-                rel={appStoreUrl ? "noopener noreferrer" : undefined}
+                href="#waitlist"
                 className="mt-7 inline-block rounded-full bg-teal px-7 py-3.5 font-medium text-injera shadow-[0_6px_24px_rgb(29_158_117_/_0.35)] transition-transform hover:-translate-y-0.5"
               >
-                Get the app
+                Join the cook waitlist
               </Link>
             </Reveal>
           </Container>

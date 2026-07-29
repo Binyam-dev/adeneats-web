@@ -8,19 +8,19 @@ const steps: { icon: StepIconName; tint: string; title: string; body: string }[]
     icon: "home",
     tint: "bg-teal-tint",
     title: "Find a cook near you",
-    body: "Browse vetted home cooks in the DMV. See their menus, ratings, and specialties — every cook is reviewed and approved before their first order.",
+    body: "When we launch, discover vetted home cooks in the DMV and explore their menus and specialties.",
   },
   {
     icon: "bowl",
     tint: "bg-berbere-tint",
-    title: "Order real home cooking",
-    body: "Pick your dishes, your spice level, and your pickup time. Pay securely in the app — tips go 100% to your cook.",
+    title: "Choose real home cooking",
+    body: "At launch, choose your dishes, spice level, and pickup time in the app — with 100% of every tip going to your cook.",
   },
   {
     icon: "handshake",
     tint: "bg-gold-tint",
     title: "Pick up & enjoy",
-    body: "Meet your cook, grab your order hot, and taste the difference a home kitchen makes. Betam tafach.",
+    body: "At launch, meet your cook, pick up your food hot, and taste the difference a home kitchen makes. Betam tafach.",
   },
 ];
 

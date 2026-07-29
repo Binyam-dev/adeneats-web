@@ -2,6 +2,15 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/order/:path*",
+        destination: "/#waitlist",
+        permanent: false,
+      },
+    ];
+  },
   // Pin explicitly — an unrelated lockfile at ~/package-lock.json would
   // otherwise make Next.js guess the workspace root incorrectly.
   turbopack: {

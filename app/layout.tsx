@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s · Aden Eats",
   },
   description:
-    "Aden Eats connects vetted Habesha home cooks with neighbors across the DMV for pickup ordering of authentic Ethiopian and Eritrean food.",
+    "Aden Eats is bringing home-cooked Ethiopian and Eritrean food from vetted Habesha cooks to neighbors across the DMV. Join the launch waitlist.",
   openGraph: {
     type: "website",
     siteName: "Aden Eats",
@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     url: "https://adeneats.com",
     title: "Aden Eats — Home-cooked Habesha food, made by neighbors",
     description:
-      "Vetted Habesha home cooks, real injera, real home kitchens. Order ahead, pick up hot across the DMV.",
+      "Home-cooked Habesha food is coming to the DMV. Meet Aden Eats and join the launch waitlist.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Aden Eats — Home-cooked Habesha food, made by neighbors",
     description:
-      "Vetted Habesha home cooks, real injera, real home kitchens. Order ahead, pick up hot across the DMV.",
+      "Home-cooked Habesha food is coming to the DMV. Meet Aden Eats and join the launch waitlist.",
   },
 };
 

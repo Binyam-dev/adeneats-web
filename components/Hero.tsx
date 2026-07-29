@@ -32,6 +32,7 @@ export default function Hero({
 }: {
   appStoreUrl?: string;
 }) {
+  void appStoreUrl;
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -85,18 +86,16 @@ export default function Hero({
               <p className="mt-6 max-w-[46ch] text-[1.05rem] text-injera-dim">
                 Real Doro Wat. Real injera. Real home kitchens. Aden Eats
                 connects you with vetted Ethiopian &amp; Eritrean home cooks
-                in your community — order ahead, pick up hot.
+                in your community. We&apos;re building the table now.
               </p>
             </FadeUp>
             <FadeUp delay={0.5} reduced={prefersReducedMotion}>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
-                  href={appStoreUrl || "/#waitlist"}
-                  target={appStoreUrl ? "_blank" : undefined}
-                  rel={appStoreUrl ? "noopener noreferrer" : undefined}
+                  href="/#waitlist"
                   className="rounded-full bg-teal px-7 py-3.5 font-medium text-injera shadow-[0_6px_24px_rgb(29_158_117_/_0.35)] transition-transform hover:-translate-y-0.5"
                 >
-                  Get the app
+                  Join the waitlist
                 </Link>
                 <Link
                   href="/cooks"
@@ -106,7 +105,7 @@ export default function Hero({
                 </Link>
               </div>
               <p className="mt-4 text-xs uppercase tracking-[0.1em] text-injera-dim/70">
-                Coming soon to the App Store
+                Coming soon to the DMV
               </p>
             </FadeUp>
           </div>
