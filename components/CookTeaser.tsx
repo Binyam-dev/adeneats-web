@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
 import Reveal from "./Reveal";
-import { publicImageExists } from "@/lib/media";
+import TiltCard from "./TiltCard";
 
-const COOK_PORTRAIT = "/images/cooks/portrait.jpg";
+const COOK_PORTRAIT = "/images/cooks/portrait.webp";
 
 const stats = [
   { value: "85%", label: "of every order is yours" },
@@ -59,33 +59,32 @@ export default function CookTeaser() {
               </Link>
             </div>
 
-            <div className="rounded-[var(--radius-card)] border border-injera/10 bg-teff/75 p-7">
-              {publicImageExists(COOK_PORTRAIT) ? (
-                <div className="relative mb-5 h-30 overflow-hidden rounded-2xl">
+            <div style={{ transform: "rotate(1.2deg)" }}>
+              <TiltCard
+                maxTilt={4}
+                className="relative rounded-[var(--radius-card)] border border-teff/15 bg-injera p-7 shadow-[0_14px_34px_rgb(0_0_0_/_0.35)]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute left-1/2 top-0 z-10 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold shadow-[0_2px_5px_rgb(0_0_0_/_0.5)]"
+                />
+                <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-2xl">
                   <Image
                     src={COOK_PORTRAIT}
-                    alt="An Aden Eats cook"
+                    alt="An Ethiopian home cook in a warm, clean home kitchen"
                     fill
                     className="object-cover"
                     sizes="(min-width: 768px) 30vw, 90vw"
                   />
                 </div>
-              ) : (
-                <div
-                  aria-hidden="true"
-                  className="mb-5 flex h-30 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#3a2a20,#5c4230)] text-center text-[0.62rem] uppercase tracking-[0.14em] text-injera/50"
-                >
-                  Photo: cook portrait
+                <p className="font-display text-[1rem] text-teff/85">
+                  Your recipes carry history. Aden helps them reach the
+                  neighbors who have been looking for that taste of home.
+                </p>
+                <div className="mt-3 text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-teff/60">
+                  Cook on your terms
                 </div>
-              )}
-              <p className="text-[0.92rem] italic text-injera-dim">
-                &quot;I&apos;ve been making doro wat for my family for twenty
-                years. Now my neighborhood gets to taste it too — and it
-                pays.&quot;
-              </p>
-              <div className="mt-3 text-[0.88rem] font-medium text-injera">
-                — A future Aden cook, maybe you
-              </div>
+              </TiltCard>
             </div>
           </div>
         </Reveal>

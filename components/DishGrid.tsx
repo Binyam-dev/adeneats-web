@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import DishCard from "./DishCard";
 import { dishes } from "@/data/dishes";
-import { publicImageExists } from "@/lib/media";
 
 export default function DishGrid() {
   return (
@@ -23,47 +22,7 @@ export default function DishGrid() {
         <div className="mt-13 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {dishes.map((dish, i) => (
             <Reveal key={dish.slug} delay={(i % 3) * 0.08}>
-              <div className="h-full overflow-hidden rounded-[var(--radius-card)] border border-border bg-teff-panel transition-transform hover:-translate-y-1.5">
-                {publicImageExists(dish.image) ? (
-                  <div className="relative h-36">
-                    <Image
-                      src={dish.image}
-                      alt={dish.name}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    />
-                  </div>
-                ) : (
-                  <div
-                    aria-hidden="true"
-                    className="flex h-36 items-center justify-center text-[0.62rem] uppercase tracking-[0.14em] text-injera/55"
-                    style={{
-                      background: `linear-gradient(135deg, ${dish.gradient[0]}, ${dish.gradient[1]})`,
-                    }}
-                  >
-                    Photo: {dish.name}
-                  </div>
-                )}
-                <div className="p-6">
-                  <div className="mb-2 flex items-baseline justify-between gap-2.5">
-                    <h3 className="text-display-md font-display text-injera">
-                      {dish.name}
-                    </h3>
-                    <span className="font-ethiopic text-base text-gold">
-                      {dish.fidel}
-                    </span>
-                  </div>
-                  <p className="text-[0.88rem] text-injera-dim">
-                    {dish.description}
-                  </p>
-                  {dish.fastingFriendly && (
-                    <span className="mt-3 inline-block rounded-full border border-teal/50 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.1em] text-teal">
-                      Fasting friendly
-                    </span>
-                  )}
-                </div>
-              </div>
+              <DishCard dish={dish} />
             </Reveal>
           ))}
         </div>

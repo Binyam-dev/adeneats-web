@@ -6,6 +6,7 @@ import Container from "@/components/Container";
 import Reveal from "@/components/Reveal";
 import TibebBand from "@/components/TibebBand";
 import WaitlistForm from "@/components/WaitlistForm";
+import StepIcon, { type StepIconName } from "@/components/StepIcon";
 
 export const metadata: Metadata = {
   title: "Cook with Aden",
@@ -19,21 +20,21 @@ const earnings = [
   { value: "$0", label: "to apply or join" },
 ];
 
-const vettingSteps = [
+const vettingSteps: { icon: StepIconName; tint: string; title: string; body: string }[] = [
   {
-    glyph: "📝",
+    icon: "form",
     tint: "bg-teal-tint",
     title: "Application",
     body: "Tell us about your kitchen, your signature dishes, and where you're based. Takes about ten minutes.",
   },
   {
-    glyph: "🔎",
+    icon: "search",
     tint: "bg-berbere-tint",
     title: "Review",
     body: "A member of the Aden team walks through food safety basics with you and confirms your kitchen meets your state's home-kitchen guidelines.",
   },
   {
-    glyph: "✅",
+    icon: "check",
     tint: "bg-gold-tint",
     title: "Approved",
     body: "Set your menu and prices in the app, go live, and start taking orders from neighbors nearby.",
@@ -59,7 +60,7 @@ const faqs = [
   },
   {
     q: "Where is Aden Eats launching first?",
-    a: "We're starting in DC, Maryland, and Virginia when the app launches on the App Store in October 2026, with more Habesha communities to follow.",
+    a: "We're starting in DC, Maryland, and Virginia, with more Habesha communities to follow.",
   },
 ];
 
@@ -133,7 +134,7 @@ export default function CooksPage() {
                     <div
                       className={`mb-5 flex h-13 w-13 items-center justify-center rounded-2xl text-2xl ${step.tint}`}
                     >
-                      {step.glyph}
+                      <StepIcon name={step.icon} />
                     </div>
                     <h3 className="text-display-md font-display text-injera">
                       {step.title}
@@ -224,7 +225,7 @@ export default function CooksPage() {
               <p className="mx-auto mt-4 max-w-[52ch] text-injera-dim">
                 The Aden Eats app is where approved cooks set menus, prices,
                 and pickup windows, and where neighbors place orders.
-                Launching on the App Store October 2026.
+                Coming soon to the App Store.
               </p>
               <Link
                 href={appStoreUrl || "#waitlist"}

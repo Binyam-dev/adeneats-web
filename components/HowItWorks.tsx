@@ -1,21 +1,23 @@
 import Container from "./Container";
 import Reveal from "./Reveal";
+import SteamThread from "./SteamThread";
+import StepIcon, { type StepIconName } from "./StepIcon";
 
-const steps = [
+const steps: { icon: StepIconName; tint: string; title: string; body: string }[] = [
   {
-    glyph: "🏡",
+    icon: "home",
     tint: "bg-teal-tint",
     title: "Find a cook near you",
     body: "Browse vetted home cooks in the DMV. See their menus, ratings, and specialties — every cook is reviewed and approved before their first order.",
   },
   {
-    glyph: "🍲",
+    icon: "bowl",
     tint: "bg-berbere-tint",
     title: "Order real home cooking",
     body: "Pick your dishes, your spice level, and your pickup time. Pay securely in the app — tips go 100% to your cook.",
   },
   {
-    glyph: "🤝",
+    icon: "handshake",
     tint: "bg-gold-tint",
     title: "Pick up & enjoy",
     body: "Meet your cook, grab your order hot, and taste the difference a home kitchen makes. Betam tafach.",
@@ -40,14 +42,15 @@ export default function HowItWorks() {
           </p>
         </Reveal>
 
-        <div className="mt-13 grid gap-6 md:grid-cols-3">
+        <div className="relative mt-13 grid gap-6 md:grid-cols-3">
+          <SteamThread />
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.08}>
               <div className="h-full rounded-[var(--radius-card)] border border-border bg-teff-panel p-8 transition-transform hover:-translate-y-1.5">
                 <div
                   className={`mb-5 flex h-13 w-13 items-center justify-center rounded-2xl text-2xl ${step.tint}`}
                 >
-                  {step.glyph}
+                  <StepIcon name={step.icon} />
                 </div>
                 <h3 className="text-display-md font-display text-injera">
                   {step.title}

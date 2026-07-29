@@ -1,6 +1,6 @@
 # Aden Eats — marketing site
 
-Phase 1 marketing site for [adeneats.com](https://adeneats.com). Next.js
+Marketing site for [adeneats.com](https://adeneats.com). Next.js
 (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion, deployed on
 Vercel. Talks to Supabase only to insert into `public.launch_waitlist` —
 there is no ordering flow yet (that's Phase 2).
@@ -21,27 +21,26 @@ See `.env.example`.
 
 | Variable                        | Used                                    | Required to run locally |
 | -------------------------------- | ---------------------------------------- | ------------------------ |
-| `NEXT_PUBLIC_SUPABASE_URL`       | client-side, waitlist insert             | yes                      |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | client-side, waitlist insert             | yes                      |
+| `NEXT_PUBLIC_SUPABASE_URL`       | Supabase API URL                          | yes                      |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | read-only public ordering preview         | yes                      |
+| `SUPABASE_SERVICE_ROLE_KEY`      | server-only waitlist insert route         | yes for waitlist         |
 | `APP_STORE_URL`                  | server-rendered into "Get the app" links | no — falls back to the waitlist form until it's set |
 
 ## Supabase setup
 
-`public.launch_waitlist` was created as of 2026-07-20 by running
-`supabase/launch_waitlist.sql` in the Supabase SQL editor. It creates the
-table and an RLS policy that allows the anon key to `INSERT` only — no
-read/update/delete access (confirmed: an anon-key `SELECT` correctly gets
-rejected with `42501 permission denied`, not a missing-table error). If
-you need to change the schema, use `ALTER TABLE` statements rather than
-re-running the `CREATE TABLE` statement.
+Apply `supabase/launch_waitlist.sql` in the Supabase SQL editor. The migration
+is repeatable: it creates or updates the table, preserves the unique
+`(email, role)` rule, enables RLS, and removes the legacy anonymous insert
+policy. `POST /api/waitlist` validates submissions and writes with the
+server-only service-role key. Never expose that key in browser code.
 
 ## Deploying (Vercel)
 
 1. Import this repo into Vercel.
 2. Framework preset: Next.js (auto-detected). No build command overrides
    needed.
-3. Add the three environment variables above in Project Settings →
-   Environment Variables (all three, for Production/Preview/Development as
+3. Add the four environment variables above in Project Settings →
+   Environment Variables (for Production/Preview/Development as
    appropriate).
 4. `vercel.json` sets baseline security response headers
    (`X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) — no
@@ -70,25 +69,11 @@ After either change, run `vercel domains verify adeneats.com` (and the
 certificate automatically once verification passes, no manual
 certificate steps.
 
-## Photography needed
+## Artwork and future photography
 
-Every photo panel on the site is currently a styled color placeholder with
-a caption (never a stock photo of non-Ethiopian food). The Hero, dish
-grid, and cook portrait panels already check for a real file at a fixed
-path (`lib/media.ts`'s `publicImageExists`) and swap in `next/image`
-automatically — **no code changes needed**, just drop the file in. Ideal
-shot order:
-
-1. Hero — table spread, shot from above → `public/images/hero.jpg`
-2. Hands tearing injera (candidate for the "How it works" section — not
-   wired up yet)
-3. Buna (coffee ceremony) — candidate for future storytelling content —
-   not wired up yet
-4. Cook portrait (`components/CookTeaser.tsx`, and repeated on `/cooks`)
-   → `public/images/cooks/portrait.jpg`
-5. Dish close-ups, one per entry in `data/dishes.ts` (Doro Wat, Kitfo,
-   Beyaynetu, Awaze Tibs, Shiro Wat, Gomen — 6 shots) →
-   `public/images/dishes/<slug>.jpg`, e.g. `public/images/dishes/doro-wat.jpg`
+The hero, dish grid, and cook feature use project-local optimized WebP
+photography under `public/images/`. Dish paths, alt text, and tap-to-reveal
+stories live in `data/dishes.ts`.
 
 ## Project structure notes for Phase 2
 

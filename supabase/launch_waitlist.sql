@@ -1,31 +1,71 @@
--- Aden Eats — launch_waitlist table
+-- Aden Eats — repeatable launch_waitlist migration
 --
--- Confirmed 2026-07-19: this table does not exist yet (the app-side
--- waitlist session hasn't run). Run this whole file once in the Supabase
--- SQL editor. If the table turns out to already exist by the time you run
--- this, drop the CREATE TABLE block below and ask for ALTER statements
--- instead — don't run CREATE TABLE against an existing table.
+-- Apply in the Supabase SQL editor before enabling the server waitlist route.
+-- The route writes with SUPABASE_SERVICE_ROLE_KEY. The service role bypasses
+-- RLS; browser/anon users intentionally receive no table policies.
 
-create table public.launch_waitlist (
-  id uuid primary key default gen_random_uuid(), -- pgcrypto, enabled by default on Supabase
+create table if not exists public.launch_waitlist (
+  id uuid primary key default gen_random_uuid(),
   email text not null,
-  region text, -- reserved for the app's own DMV sub-region picker; this site only ever writes city
-  role text not null check (role in ('client', 'cook')),
+  region text,
+  role text not null,
   city text,
-  name text, -- cook signups only
-  cuisine_specialty text, -- cook signups only
-  created_at timestamptz not null default now(),
-  constraint launch_waitlist_email_role_key unique (email, role)
+  name text,
+  cuisine_specialty text,
+  created_at timestamptz not null default now()
 );
+
+alter table public.launch_waitlist add column if not exists email text;
+alter table public.launch_waitlist add column if not exists normalized_email text;
+alter table public.launch_waitlist add column if not exists region text;
+alter table public.launch_waitlist add column if not exists role text;
+alter table public.launch_waitlist add column if not exists city text;
+alter table public.launch_waitlist add column if not exists name text;
+alter table public.launch_waitlist add column if not exists cuisine_specialty text;
+alter table public.launch_waitlist add column if not exists created_at timestamptz default now();
+
+-- Some earlier versions of the mobile backend introduced normalized_email.
+-- Keep it populated so this migration works with that schema as well as a
+-- fresh table. The API writes both email fields on every new submission.
+update public.launch_waitlist
+set normalized_email = lower(trim(email))
+where normalized_email is null and email is not null;
+
+alter table public.launch_waitlist alter column normalized_email set not null;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conrelid = 'public.launch_waitlist'::regclass
+      and conname = 'launch_waitlist_role_check'
+  ) then
+    alter table public.launch_waitlist
+      add constraint launch_waitlist_role_check
+      check (role in ('client', 'cook')) not valid;
+  end if;
+end
+$$;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conrelid = 'public.launch_waitlist'::regclass
+      and contype = 'u'
+      and conname = 'launch_waitlist_email_role_key'
+  ) then
+    alter table public.launch_waitlist
+      add constraint launch_waitlist_email_role_key unique (email, role);
+  end if;
+end
+$$;
 
 alter table public.launch_waitlist enable row level security;
 
--- Anon (the site's NEXT_PUBLIC_SUPABASE_ANON_KEY) may only insert.
--- No select/update/delete policy is defined, so RLS denies those by
--- default for anon; service_role (used server-side, e.g. an admin view)
--- bypasses RLS entirely.
-create policy "Anon can join the waitlist"
-  on public.launch_waitlist
-  for insert
-  to anon
-  with check (true);
+-- Remove the legacy direct-browser insert path. This is idempotent and leaves
+-- anon with no SELECT/INSERT/UPDATE/DELETE policy on this table.
+drop policy if exists "Anon can join the waitlist" on public.launch_waitlist;
+revoke all on table public.launch_waitlist from anon;

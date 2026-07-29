@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
 import Reveal from "@/components/Reveal";
+import CookCard from "@/components/CookCard";
 import { getServerSupabase } from "@/lib/supabase-server";
 
 export const metadata: Metadata = {
@@ -43,10 +43,6 @@ const PLACEHOLDER_GRADIENTS: [string, string][] = [
   ["#5c3a20", "#8a5a2e"],
 ];
 
-function formatPrice(cents: number): string {
-  return `$${(cents / 100).toFixed(2)}`;
-}
-
 export default async function OrderPage() {
   const appStoreUrl = process.env.APP_STORE_URL;
   const supabase = getServerSupabase();
@@ -79,80 +75,33 @@ export default async function OrderPage() {
           </Container>
         </section>
 
-        <section className="pb-24">
+        <section
+          className="pb-24"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgb(0 0 0 / 0.18) 1.5px, transparent 1.8px)," +
+              "radial-gradient(rgb(245 235 220 / 0.05) 1px, transparent 1.6px)",
+            backgroundSize: "26px 26px, 14px 14px",
+            backgroundPosition: "0 0, 7px 7px",
+          }}
+        >
           <Container>
             {cooks && cooks.length > 0 ? (
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid gap-8 py-6 md:grid-cols-2">
                 {cooks.map((cook, i) => (
                   <Reveal key={cook.id} delay={(i % 2) * 0.08}>
-                    <div className="h-full overflow-hidden rounded-[var(--radius-card)] border border-border bg-teff-panel transition-transform hover:-translate-y-1.5">
-                      {cook.photo_url ? (
-                        <div className="relative h-40">
-                          <Image
-                            src={cook.photo_url}
-                            alt={cook.name}
-                            fill
-                            className="object-cover"
-                            sizes="(min-width: 768px) 50vw, 100vw"
-                          />
-                        </div>
-                      ) : (
-                        <div
-                          aria-hidden="true"
-                          className="flex h-40 items-center justify-center text-[0.62rem] uppercase tracking-[0.14em] text-injera/55"
-                          style={{
-                            background: `linear-gradient(135deg, ${
-                              PLACEHOLDER_GRADIENTS[i % PLACEHOLDER_GRADIENTS.length][0]
-                            }, ${PLACEHOLDER_GRADIENTS[i % PLACEHOLDER_GRADIENTS.length][1]})`,
-                          }}
-                        >
-                          Photo: {cook.name}
-                        </div>
-                      )}
-
-                      <div className="p-7">
-                        <h2 className="text-display-md font-display text-injera">
-                          {cook.name}
-                        </h2>
-                        <p className="mt-1 text-[0.85rem] uppercase tracking-[0.1em] text-injera-dim">
-                          {[cook.city, cook.cuisine_specialty]
-                            .filter(Boolean)
-                            .join(" · ")}
-                        </p>
-                        {cook.bio && (
-                          <p className="mt-3 text-[0.92rem] text-injera-dim">
-                            {cook.bio}
-                          </p>
-                        )}
-
-                        {cook.menu_items.length > 0 && (
-                          <ul className="mt-6 space-y-4 border-t border-border pt-5">
-                            {cook.menu_items.map((item) => (
-                              <li key={item.id}>
-                                <div className="flex items-baseline justify-between gap-3">
-                                  <span className="font-display text-injera">
-                                    {item.name}
-                                  </span>
-                                  <span className="whitespace-nowrap text-[0.9rem] text-gold">
-                                    {formatPrice(item.price_cents)}
-                                  </span>
-                                </div>
-                                {item.description && (
-                                  <p className="mt-1 text-[0.88rem] text-injera-dim">
-                                    {item.description}
-                                  </p>
-                                )}
-                                {item.fasting_friendly && (
-                                  <span className="mt-2 inline-block rounded-full border border-teal/50 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.1em] text-teal">
-                                    Fasting friendly
-                                  </span>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    </div>
+                    <CookCard
+                      index={i}
+                      name={cook.name}
+                      bio={cook.bio}
+                      city={cook.city}
+                      cuisineSpecialty={cook.cuisine_specialty}
+                      photoUrl={cook.photo_url}
+                      menuItems={cook.menu_items}
+                      fallbackGradient={
+                        PLACEHOLDER_GRADIENTS[i % PLACEHOLDER_GRADIENTS.length]
+                      }
+                    />
                   </Reveal>
                 ))}
               </div>

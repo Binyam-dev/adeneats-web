@@ -15,6 +15,7 @@
   --color-teal: #1d9e75;        /* brand teal — primary buttons, links, "cook" accents */
   --color-teal-deep: #0f6b4e;   /* gradient stops, deep hover state */
   --color-berbere: #c43b1e;     /* berbere red-orange — spice/heat accent, dish photo treatments */
+  --color-error: #ff8f73;        /* accessible error text on teff surfaces */
   --color-gold: #e2a93b;        /* niter kibbeh gold — tibeb pattern, fidel accents, cook CTA */
 
   /* ---------- Derived shades ---------- */

@@ -1,9 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
+import FoodHero3D from "./FoodHero3D";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -29,11 +29,8 @@ function FadeUp({
 
 export default function Hero({
   appStoreUrl,
-  heroImage,
 }: {
   appStoreUrl?: string;
-  /** Path under /public, only passed once the file exists on disk. */
-  heroImage?: string;
 }) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -109,45 +106,18 @@ export default function Hero({
                 </Link>
               </div>
               <p className="mt-4 text-xs uppercase tracking-[0.1em] text-injera-dim/70">
-                Coming to the App Store — October 2026
+                Coming soon to the App Store
               </p>
             </FadeUp>
           </div>
 
           <motion.div
-            aria-hidden="true"
             initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.92, rotate: -4 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
-            className="relative mx-auto aspect-square w-full max-w-[420px] overflow-hidden rounded-full shadow-[0_40px_120px_rgb(0_0_0_/_0.55)] ring-8 ring-gold/15"
-            style={
-              heroImage
-                ? undefined
-                : {
-                    background:
-                      "radial-gradient(circle at 38% 34%, rgb(196 59 30 / 0.85) 0 12%, transparent 13%)," +
-                      "radial-gradient(circle at 62% 30%, rgb(226 169 59 / 0.8) 0 10%, transparent 11%)," +
-                      "radial-gradient(circle at 66% 60%, rgb(29 158 117 / 0.7) 0 11%, transparent 12%)," +
-                      "radial-gradient(circle at 40% 64%, rgb(120 72 40 / 0.9) 0 12%, transparent 13%)," +
-                      "radial-gradient(circle at 52% 47%, rgb(245 235 220 / 0.16) 0 30%, transparent 31%)," +
-                      "radial-gradient(circle, #3a2a20 0 68%, #4a3527 68% 100%)",
-                  }
-            }
+            className="relative"
           >
-            {heroImage ? (
-              <Image
-                src={heroImage}
-                alt=""
-                fill
-                priority
-                className="object-cover"
-                sizes="(min-width: 1024px) 420px, 90vw"
-              />
-            ) : (
-              <span className="absolute inset-x-0 bottom-10 text-center text-[0.65rem] uppercase tracking-[0.14em] text-injera/50">
-                Photo: injera spread, shot from above
-              </span>
-            )}
+            <FoodHero3D />
           </motion.div>
         </div>
       </Container>

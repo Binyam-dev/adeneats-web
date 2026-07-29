@@ -4,10 +4,15 @@ export type Dish = {
   fidel: string;
   description: string;
   fastingFriendly: boolean;
-  /** Gradient stops for the placeholder photo panel, shown until `image`
-   * exists on disk — see README's shot list. */
-  gradient: [string, string];
-  /** Path under /public where this dish's photo goes once shot. */
+  /** First name of the (illustrative, not-yet-real) cook this dish is
+   * attributed to — paired with `story` as "{cookFirstName}'s {name}",
+   * revealed on tap. See DishCard. */
+  cookFirstName: string;
+  /** One-line origin/human detail, shown after the cook attribution —
+   * e.g. "her mother's recipe from Gondar". Revealed on tap — see
+   * DishCard. */
+  story: string;
+  alt: string;
   image: string;
 };
 
@@ -19,8 +24,10 @@ export const dishes: Dish[] = [
     description:
       "Chicken slow-simmered in rich berbere with a whole boiled egg — the national treasure.",
     fastingFriendly: false,
-    gradient: ["#7a2412", "#c43b1e"],
-    image: "/images/dishes/doro-wat.jpg",
+    cookFirstName: "Selam",
+    story: "her mother's recipe from Gondar — the whole egg saved for whoever's earned it.",
+    alt: "Doro wat with chicken and a boiled egg in berbere sauce on injera",
+    image: "/images/dishes/doro-wat.webp",
   },
   {
     slug: "kitfo",
@@ -29,8 +36,10 @@ export const dishes: Dish[] = [
     description:
       "Finely minced beef with mitmita and warmed niter kibbeh. Leb leb or fully cooked — your call.",
     fastingFriendly: false,
-    gradient: ["#8a5a16", "#e2a93b"],
-    image: "/images/dishes/kitfo.jpg",
+    cookFirstName: "Bereket",
+    story: "the way his grandfather taught him in Hosaena — fresh enough to compliment the cook standing next to you.",
+    alt: "Kitfo served on injera with ayib and gomen",
+    image: "/images/dishes/kitfo.webp",
   },
   {
     slug: "beyaynetu",
@@ -39,8 +48,10 @@ export const dishes: Dish[] = [
     description:
       "The colorful fasting platter — a full spread of veggie stews on injera.",
     fastingFriendly: true,
-    gradient: ["#0f6b4e", "#1d9e75"],
-    image: "/images/dishes/beyaynetu.jpg",
+    cookFirstName: "Meron",
+    story: "the fasting-Friday platter she's made every week since she was twelve — one scoop of each stew, never skimped.",
+    alt: "Beyaynetu vegan stews and vegetables arranged on injera",
+    image: "/images/dishes/beyaynetu.webp",
   },
   {
     slug: "awaze-tibs",
@@ -49,8 +60,10 @@ export const dishes: Dish[] = [
     description:
       "Sizzling sautéed beef with jalapeño, rosemary, and smoky awaze heat.",
     fastingFriendly: false,
-    gradient: ["#5c3a20", "#8a5a2e"],
-    image: "/images/dishes/awaze-tibs.jpg",
+    cookFirstName: "Yonas",
+    story: "the recipe he perfected running a tibs stall in Addis, before he ever left — you'll hear the awaze hit the pan before you see it.",
+    alt: "Awaze tibs with beef, onion, jalapeño, and rosemary beside injera",
+    image: "/images/dishes/awaze-tibs.webp",
   },
   {
     slug: "shiro-wat",
@@ -58,8 +71,10 @@ export const dishes: Dish[] = [
     fidel: "ሽሮ ወጥ",
     description: "Silky spiced chickpea stew — the beloved everyday comfort.",
     fastingFriendly: true,
-    gradient: ["#6e1f3a", "#a03b2a"],
-    image: "/images/dishes/shiro-wat.jpg",
+    cookFirstName: "Frehiwot",
+    story: "the first dish she ever cooked on her own, at nine — the one every Ethiopian kid learns to crave before they can pronounce \"chickpea.\"",
+    alt: "Smooth Ethiopian shiro wat with folded injera",
+    image: "/images/dishes/shiro-wat.webp",
   },
   {
     slug: "gomen",
@@ -67,7 +82,9 @@ export const dishes: Dish[] = [
     fidel: "ጎመን",
     description: "Collard greens slow-cooked with garlic and ginger.",
     fastingFriendly: true,
-    gradient: ["#274d3d", "#4e7a4a"],
-    image: "/images/dishes/gomen.jpg",
+    cookFirstName: "Amanuel",
+    story: "slow-cooked the way his mother always started the big Sunday spread — patient, first thing on the stove.",
+    alt: "Slow-cooked Ethiopian collard greens served on injera",
+    image: "/images/dishes/gomen.webp",
   },
 ];

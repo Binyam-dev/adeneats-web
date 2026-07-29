@@ -6,6 +6,7 @@
 
 body {
   font-family: var(--font-body);
+  overflow-x: clip;
 }
 
 /* Amharic accents use the Ethiopic face explicitly via className="font-ethiopic" —
@@ -25,6 +26,62 @@ body {
   border-radius: 2px;
 }
 
+@keyframes steam-drift {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+
+@keyframes steam-rise {
+  0% { opacity: 0; transform: translateY(9px); }
+  35% { opacity: 0.45; }
+  100% { opacity: 0; transform: translateY(-9px); }
+}
+
+.hero-food-float {
+  animation: hero-float 7s var(--ease-aden) infinite;
+}
+
+.hero-food-glow {
+  background: radial-gradient(circle, rgb(226 169 59 / 0.3), transparent 68%);
+  filter: blur(24px);
+  transform: translateZ(-42px) scale(1.15);
+}
+
+.steam-wisp {
+  stroke: rgb(245 235 220 / 0.6);
+  stroke-width: 2;
+  stroke-linecap: round;
+  filter: blur(0.5px);
+  animation: steam-rise 4.8s ease-in-out infinite;
+}
+
+.steam-wisp-b { animation-delay: 1.2s; }
+.steam-wisp-c { animation-delay: 2.25s; }
+
+.food-card-shine {
+  background: linear-gradient(115deg, transparent 28%, rgb(255 255 255 / 0.14) 48%, transparent 68%);
+  opacity: 0;
+  transform: translateX(-35%);
+  transition: opacity 300ms var(--ease-aden), transform 400ms var(--ease-aden);
+}
+
+.group:hover .food-card-shine {
+  opacity: 1;
+  transform: translateX(18%);
+}
+
+button,
+a,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -33,5 +90,10 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .hero-food-float,
+  .steam-wisp {
+    animation: none !important;
   }
 }
