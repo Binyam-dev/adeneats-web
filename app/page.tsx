@@ -5,6 +5,9 @@ import DishGrid from "@/components/DishGrid";
 import CookTeaser from "@/components/CookTeaser";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
+import FidelMarquee from "@/components/FidelMarquee";
+import CulturalStory from "@/components/CulturalStory";
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -26,6 +29,7 @@ export default function Home() {
 
   return (
     <>
+      <ScrollProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
@@ -33,8 +37,10 @@ export default function Home() {
       <Nav appStoreUrl={appStoreUrl} />
       <main className="flex-1">
         <Hero appStoreUrl={appStoreUrl} />
+        <FidelMarquee />
         <HowItWorks />
         <DishGrid />
+        <CulturalStory />
         <CookTeaser />
         <WaitlistSection />
       </main>

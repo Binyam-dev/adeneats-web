@@ -43,6 +43,16 @@ body {
   100% { opacity: 0; transform: translateY(-9px); }
 }
 
+@keyframes orbit-turn {
+  to { transform: translateZ(-28px) rotate(360deg); }
+}
+
+@keyframes buna-steam {
+  0% { opacity: 0; transform: translate3d(0, 12px, 0) scaleX(0.85); }
+  35% { opacity: 0.45; }
+  100% { opacity: 0; transform: translate3d(8px, -42px, 0) scaleX(1.15); }
+}
+
 .hero-food-float {
   animation: hero-float 7s var(--ease-aden) infinite;
 }
@@ -51,6 +61,28 @@ body {
   background: radial-gradient(circle, rgb(226 169 59 / 0.3), transparent 68%);
   filter: blur(24px);
   transform: translateZ(-42px) scale(1.15);
+}
+
+.hero-orbit {
+  animation: orbit-turn 34s linear infinite;
+  transform-origin: center;
+}
+
+.hero-spice-chip {
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.5rem;
+  border: 1px solid rgb(245 235 220 / 0.15);
+  border-radius: 999px;
+  background: rgb(35 24 18 / 0.82);
+  padding: 0.55rem 0.8rem;
+  color: var(--color-injera-dim);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 35px rgb(0 0 0 / 0.28);
+  backdrop-filter: blur(10px);
 }
 
 .steam-wisp {
@@ -76,6 +108,72 @@ body {
   transform: translateX(18%);
 }
 
+.culture-halo {
+  position: absolute;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.culture-halo-left {
+  left: -14rem;
+  top: 14rem;
+  background: var(--color-teal);
+}
+
+.culture-halo-right {
+  right: -13rem;
+  top: 5rem;
+  background: var(--color-berbere);
+}
+
+.culture-card {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.035), 0 20px 55px rgb(0 0 0 / 0.18);
+  transition: border-color 300ms var(--ease-aden), box-shadow 300ms var(--ease-aden);
+}
+
+.culture-card:hover {
+  border-color: rgb(226 169 59 / 0.38);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 28px 65px rgb(0 0 0 / 0.28);
+}
+
+.culture-card-buna {
+  background:
+    radial-gradient(circle at 85% 60%, rgb(196 59 30 / 0.24), transparent 38%),
+    linear-gradient(125deg, var(--color-teff-panel), var(--color-teff-panel-2));
+}
+
+.injera-texture {
+  background:
+    radial-gradient(circle, rgb(245 235 220 / 0.18) 0 1px, transparent 1.5px);
+  background-size: 9px 9px;
+}
+
+.buna-steam {
+  position: absolute;
+  top: 4.4rem;
+  right: 7.4rem;
+  width: 2px;
+  height: 3.6rem;
+  border-radius: 999px;
+  background: linear-gradient(to top, transparent, rgb(245 235 220 / 0.55), transparent);
+  filter: blur(1px);
+  animation: buna-steam 3.8s ease-in-out infinite;
+}
+
+.buna-steam-two {
+  right: 9rem;
+  animation-delay: 1.1s;
+}
+
+.buna-steam-three {
+  right: 5.8rem;
+  animation-delay: 2.2s;
+}
+
 button,
 a,
 summary {
@@ -93,7 +191,9 @@ summary {
   }
 
   .hero-food-float,
-  .steam-wisp {
+  .steam-wisp,
+  .hero-orbit,
+  .buna-steam {
     animation: none !important;
   }
 }

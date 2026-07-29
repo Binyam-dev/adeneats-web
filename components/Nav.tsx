@@ -27,6 +27,7 @@ export default function Nav({ appStoreUrl }: { appStoreUrl?: string }) {
             {[
               ["/#how", "How it works"],
               ["/#dishes", "Dishes"],
+              ["/#culture", "Culture"],
               ["/order", "Order"],
               ["/cooks", "Cook with Aden"],
             ].map(([href, label]) => (

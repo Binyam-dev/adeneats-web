@@ -60,6 +60,24 @@ export default function FoodHero3D() {
         className="hero-food-float relative h-full w-full [transform-style:preserve-3d]"
         style={{ rotateX, rotateY }}
       >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 100 100"
+          className="hero-orbit absolute -inset-[4%] h-[108%] w-[108%] overflow-visible [transform:translateZ(-28px)]"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="47"
+            fill="none"
+            stroke="rgb(226 169 59 / .32)"
+            strokeWidth=".35"
+            strokeDasharray="2 3"
+          />
+          <circle cx="50" cy="3" r="1.4" fill="#e2a93b" />
+          <circle cx="91" cy="73" r="1" fill="#1d9e75" />
+          <circle cx="9" cy="73" r="1" fill="#c43b1e" />
+        </svg>
         <div aria-hidden="true" className="hero-food-glow absolute inset-[8%] rounded-full" />
         <div
           aria-hidden="true"
@@ -80,6 +98,24 @@ export default function FoodHero3D() {
           />
         </div>
         <SteamEffect className="absolute left-1/2 top-[-4%] h-[30%] w-[42%] -translate-x-1/2 [transform:translateZ(42px)]" />
+      </motion.div>
+      <motion.div
+        aria-hidden="true"
+        className="hero-spice-chip absolute -left-2 top-[17%] hidden sm:flex"
+        animate={reduced ? undefined : { y: [0, -7, 0], rotate: [-3, -1, -3] }}
+        transition={{ duration: 5.8, ease: "easeInOut", repeat: Infinity }}
+      >
+        <span className="h-2 w-2 rounded-full bg-berbere" />
+        Berbere
+      </motion.div>
+      <motion.div
+        aria-hidden="true"
+        className="hero-spice-chip absolute -right-3 bottom-[22%] hidden sm:flex"
+        animate={reduced ? undefined : { y: [0, 8, 0], rotate: [3, 1, 3] }}
+        transition={{ duration: 6.4, ease: "easeInOut", repeat: Infinity }}
+      >
+        <span className="h-2 w-2 rounded-full bg-gold" />
+        Niter kibbeh
       </motion.div>
     </motion.div>
   );
