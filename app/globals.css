@@ -9,6 +9,35 @@ body {
   overflow-x: clip;
 }
 
+html {
+  scroll-padding-top: 5rem;
+}
+
+.cinematic-scene {
+  isolation: isolate;
+}
+
+.ingredient-panel {
+  transform-style: preserve-3d;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 28px 80px rgb(0 0 0 / 0.28);
+}
+
+.ingredient-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 20%, rgb(255 255 255 / 0.045), transparent 70%);
+  transform: translateX(-80%);
+  transition: transform 700ms var(--ease-aden);
+}
+
+.ingredient-panel:hover::after {
+  transform: translateX(70%);
+}
+
 /* Amharic accents use the Ethiopic face explicitly via className="font-ethiopic" —
    never inherited into surrounding Latin text. */
 
@@ -47,6 +76,25 @@ body {
   to { transform: translateZ(-28px) rotate(360deg); }
 }
 
+@keyframes orbit-turn-reverse {
+  to { transform: translateZ(-12px) rotate(-360deg); }
+}
+
+@keyframes plate-breathe {
+  0%, 100% { filter: saturate(1.02) brightness(0.98); }
+  50% { filter: saturate(1.14) brightness(1.06); }
+}
+
+@keyframes chip-drift {
+  0%, 100% { transform: translate3d(0, 0, 30px) rotate(-1deg); }
+  50% { transform: translate3d(0, -13px, 48px) rotate(1.5deg); }
+}
+
+@keyframes aura-pulse {
+  0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.92); }
+  50% { opacity: 0.82; transform: translate(-50%, -50%) scale(1.08); }
+}
+
 @keyframes ember-drift {
   0%, 100% { opacity: 0.18; transform: translate3d(0, 0, 0) scale(0.8); }
   45% { opacity: 0.7; }
@@ -56,6 +104,11 @@ body {
 @keyframes scroll-breathe {
   0%, 100% { transform: scaleX(0.45); transform-origin: left; opacity: 0.35; }
   50% { transform: scaleX(1); transform-origin: left; opacity: 0.9; }
+}
+
+@keyframes word-enter {
+  from { opacity: 0; transform: translate3d(0, 2rem, 0) rotateX(-18deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); }
 }
 
 @keyframes buna-steam {
@@ -86,6 +139,7 @@ body {
 .hero-ember-one { bottom: 17%; right: 31%; }
 .hero-ember-two { bottom: 9%; right: 17%; animation-delay: 2.7s; }
 .hero-scroll-line { animation: scroll-breathe 2.4s ease-in-out infinite; }
+.kinetic-word { animation: word-enter 780ms var(--ease-aden) both; }
 
 .magnetic-cta {
   transition: transform 350ms var(--ease-aden), box-shadow 350ms var(--ease-aden);
@@ -105,6 +159,37 @@ body {
 .hero-orbit {
   animation: orbit-turn 34s linear infinite;
   transform-origin: center;
+}
+
+.hero-orbit-reverse {
+  animation: orbit-turn-reverse 24s linear infinite;
+}
+
+.hero-plate-aura {
+  background:
+    radial-gradient(circle, rgb(226 169 59 / 0.25), rgb(196 59 30 / 0.12) 40%, transparent 69%);
+  filter: blur(16px);
+  animation: aura-pulse 5.5s ease-in-out infinite;
+}
+
+.hero-floating-plate {
+  transform-style: preserve-3d;
+  animation: plate-breathe 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-chip-one,
+.hero-chip-two,
+.hero-chip-three {
+  animation: chip-drift 6.5s ease-in-out infinite;
+}
+
+.hero-chip-two {
+  animation-delay: -2.4s;
+}
+
+.hero-chip-three {
+  animation-delay: -4.1s;
 }
 
 .hero-spice-chip {
@@ -234,6 +319,15 @@ summary {
   -webkit-tap-highlight-color: transparent;
 }
 
+.recipe-rail {
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  overscroll-behavior-inline: contain;
+}
+
+.recipe-rail article:nth-child(even) {
+  margin-top: 1.8rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -247,6 +341,12 @@ summary {
   .hero-food-float,
   .steam-wisp,
   .hero-orbit,
+  .hero-orbit-reverse,
+  .hero-floating-plate,
+  .hero-plate-aura,
+  .hero-chip-one,
+  .hero-chip-two,
+  .hero-chip-three,
   .buna-steam {
     animation: none !important;
   }
@@ -256,7 +356,8 @@ summary {
   }
 
   .hero-ember,
-  .hero-scroll-line {
+  .hero-scroll-line,
+  .kinetic-word {
     animation: none !important;
   }
 }

@@ -11,6 +11,7 @@
 @theme {
   /* ---------- Anchor brand colors (named once; everything else derives from these) ---------- */
   --color-teff: #231812;        /* deep roasted brown — page background, nearly every section */
+  --color-coffee-black: #110b08;
   --color-injera: #f5ebdc;      /* injera cream — primary text on dark */
   --color-teal: #b94b2c;        /* warm clay — retained token name for compatibility */
   --color-teal-deep: #7d2d1b;
@@ -24,6 +25,7 @@
   --color-injera-dim: #cbb8a4;    /* muted cream — secondary text, captions */
   --color-berbere-deep: #7a2412;  /* dish photo gradient stop */
   --color-gold-deep: #8a5a16;     /* dish photo gradient stop */
+  --color-indigo: #44405e;
   --color-border: rgb(245 235 220 / 0.1);    /* hairline borders on dark panels */
   --color-teal-tint: rgb(29 158 117 / 0.16); /* icon chip bg */
   --color-berbere-tint: rgb(196 59 30 / 0.16);

@@ -1,14 +1,17 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
-import DishGrid from "@/components/DishGrid";
-import CookTeaser from "@/components/CookTeaser";
-import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import FidelMarquee from "@/components/FidelMarquee";
 import CulturalStory from "@/components/CulturalStory";
 import CoffeeCeremony from "@/components/CoffeeCeremony";
+import IngredientJourney from "@/components/cinematic/IngredientJourney";
+import CookStoryScene from "@/components/cinematic/CookStoryScene";
+import AnimatedOrderDemo from "@/components/cinematic/AnimatedOrderDemo";
+import HumanPayoffScene from "@/components/cinematic/HumanPayoffScene";
+import CommunityCTA from "@/components/cinematic/CommunityCTA";
+import RecipeDiscovery from "@/components/cinematic/RecipeDiscovery";
+import StoryInterlude from "@/components/cinematic/StoryInterlude";
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -39,12 +42,15 @@ export default function Home() {
       <main className="flex-1">
         <Hero appStoreUrl={appStoreUrl} />
         <FidelMarquee />
-        <div id="story"><HowItWorks /></div>
-        <DishGrid />
+        <IngredientJourney />
+        <CookStoryScene />
+        <StoryInterlude />
+        <AnimatedOrderDemo />
+        <HumanPayoffScene />
+        <RecipeDiscovery />
         <CulturalStory />
         <CoffeeCeremony />
-        <CookTeaser />
-        <WaitlistSection />
+        <CommunityCTA />
       </main>
       <Footer />
     </>
