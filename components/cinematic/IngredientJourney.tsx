@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { ingredients } from "@/data/cinematic";
 import Container from "@/components/Container";
 import SceneHeading from "./SceneHeading";
@@ -81,20 +82,32 @@ export default function IngredientJourney() {
               <article
                 key={ingredient.name}
                 data-ingredient-orbit
-                className="ingredient-panel group relative min-h-[22rem] overflow-hidden rounded-[2rem] border border-injera/10 bg-teff-panel p-7 lg:w-[23rem] lg:shrink-0"
+                className="ingredient-panel group relative min-h-[31rem] overflow-hidden rounded-[2rem] border border-injera/10 bg-teff-panel lg:w-[23rem] lg:shrink-0"
               >
+                <Image
+                  src={ingredient.image}
+                  alt={ingredient.alt}
+                  fill
+                  sizes="(max-width: 640px) calc(100vw - 2.5rem), (max-width: 1024px) 50vw, 23rem"
+                  className="object-cover transition duration-700 ease-out group-hover:scale-[1.06]"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_11_8_/_0.06)_18%,rgb(17_11_8_/_0.48)_48%,rgb(17_11_8_/_0.97)_100%)]" />
                 <div
                   aria-hidden="true"
                   className="absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-25 blur-3xl transition-transform duration-700 group-hover:scale-150"
                   style={{ background: ingredient.color }}
                 />
-                <span className="font-display text-sm text-injera/35">0{index + 1}</span>
-                <span className="mt-8 block font-ethiopic text-3xl text-gold">{ingredient.fidel}</span>
-                <h3 className="mt-3 font-display text-4xl text-injera">{ingredient.name}</h3>
-                <p className="mt-5 leading-relaxed text-injera-dim">{ingredient.note}</p>
-                <div className="absolute inset-x-7 bottom-7 flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-injera/45">
-                  <span className="h-px flex-1 bg-injera/15" />
-                  Part of the table
+                <span className="absolute left-7 top-7 rounded-full border border-injera/20 bg-black/30 px-3 py-1.5 font-display text-sm text-injera/70 backdrop-blur-md">
+                  0{index + 1}
+                </span>
+                <div className="absolute inset-x-0 bottom-0 p-7">
+                  <span className="block font-ethiopic text-3xl text-gold">{ingredient.fidel}</span>
+                  <h3 className="mt-2 font-display text-4xl text-injera">{ingredient.name}</h3>
+                  <p className="mt-3 leading-relaxed text-injera-dim">{ingredient.note}</p>
+                  <div className="mt-5 flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-injera/45">
+                    <span className="h-px flex-1 bg-injera/15" />
+                    Part of the table
+                  </div>
                 </div>
               </article>
             ))}

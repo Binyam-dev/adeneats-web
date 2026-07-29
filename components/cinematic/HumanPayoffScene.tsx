@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Container from "@/components/Container";
 import SceneHeading from "./SceneHeading";
 
@@ -25,6 +26,15 @@ export default function HumanPayoffScene() {
             viewport={{ once: true, amount: 0.3 }}
             className="relative overflow-hidden rounded-[2.2rem] border border-gold/20 bg-teff-panel p-8 sm:p-10"
           >
+            <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-[1.4rem] border border-injera/10">
+              <Image
+                src="/images/cooks/portrait.webp"
+                alt="A local Ethiopian home cook smiling in her kitchen"
+                fill
+                sizes="(max-width: 1024px) 92vw, 520px"
+                className="object-cover object-center transition duration-700 hover:scale-105"
+              />
+            </div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">Cook’s home · demonstration</p>
             <h3 className="mt-5 font-display text-4xl text-injera">Cook what you love.</h3>
             <p className="mt-3 max-w-md text-injera-dim">Earn from your talent. Build within your community.</p>
@@ -53,6 +63,16 @@ export default function HumanPayoffScene() {
             viewport={{ once: true, amount: 0.3 }}
             className="relative overflow-hidden rounded-[2.2rem] border border-berbere/25 bg-[linear-gradient(145deg,var(--color-berbere-deep),var(--color-teff-panel-2))] p-8 sm:p-10"
           >
+            <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-[1.4rem] border border-injera/10">
+              <Image
+                src="/images/dishes/beyaynetu.webp"
+                alt="A colorful Ethiopian beyaynetu meal arranged on injera"
+                fill
+                sizes="(max-width: 1024px) 92vw, 520px"
+                className="object-cover transition duration-700 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgb(17_11_8_/_0.35))]" />
+            </div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">Customer’s home · demonstration</p>
             <h3 className="mt-5 max-w-[12ch] font-display text-4xl text-injera">Open the lid. Let the room change.</h3>
             <p className="mt-4 max-w-md text-injera-dim">Steam rises. Injera is torn. The first bite becomes a thank-you sent back to the cook.</p>

@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { fulfillmentStatuses, orderSteps } from "@/data/cinematic";
 import Container from "@/components/Container";
 import SceneHeading from "./SceneHeading";
@@ -26,6 +27,17 @@ export default function AnimatedOrderDemo() {
               <div className="mx-auto mb-6 h-1.5 w-16 rounded-full bg-injera/20" />
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-gold">App concept · not live</p>
               <h3 className="mt-3 font-display text-3xl">Almaz’s kitchen</h3>
+              <div className="relative mt-5 aspect-[16/10] overflow-hidden rounded-2xl border border-injera/10">
+                <Image
+                  src="/images/dishes/doro-wat.webp"
+                  alt="Doro wat with chicken and egg served on injera"
+                  fill
+                  sizes="320px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgb(17_11_8_/_0.75))]" />
+                <span className="absolute bottom-3 left-3 text-xs font-bold text-injera">Doro wat · meal preview</span>
+              </div>
               <div className="mt-6 space-y-3">
                 {orderSteps.map((step, index) => (
                   <motion.div

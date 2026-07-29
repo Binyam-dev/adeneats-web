@@ -59,10 +59,17 @@ export default function CulturalStory() {
               <motion.article
                 whileHover={reduced ? undefined : { y: -5, rotateX: -1.5, rotateY: 1.5 }}
                 transition={{ duration: 0.3, ease: EASE }}
-                className="culture-card relative overflow-hidden rounded-[var(--radius-panel)] border border-teal/25 bg-teal-tint p-7"
+                className="culture-card group relative min-h-[25rem] overflow-hidden rounded-[var(--radius-panel)] border border-teal/25 bg-teal-tint p-7"
               >
-                <InjeraMotif />
-                <div className="relative z-10">
+                <Image
+                  src="/images/culture/injera.webp"
+                  alt="Fresh injera folded in a traditional woven basket"
+                  fill
+                  sizes="(max-width: 640px) 92vw, 340px"
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_11_8_/_0.08),rgb(17_11_8_/_0.94)_86%)]" />
+                <div className="absolute inset-x-7 bottom-7 z-10">
                   <span className="font-ethiopic text-lg text-teal">እንጀራ</span>
                   <h3 className="mt-3 font-display text-2xl text-injera">
                     Injera holds the table together.
@@ -77,10 +84,17 @@ export default function CulturalStory() {
               <motion.article
                 whileHover={reduced ? undefined : { y: -5, rotateX: 1.5, rotateY: 1.5 }}
                 transition={{ duration: 0.3, ease: EASE }}
-                className="culture-card relative overflow-hidden rounded-[var(--radius-panel)] border border-gold/25 bg-gold-tint p-7"
+                className="culture-card group relative min-h-[25rem] overflow-hidden rounded-[var(--radius-panel)] border border-gold/25 bg-gold-tint p-7"
               >
-                <GurshaMark />
-                <div className="relative z-10">
+                <Image
+                  src="/images/culture/gursha.webp"
+                  alt="An Ethiopian woman offering a gursha bite to a loved one at home"
+                  fill
+                  sizes="(max-width: 640px) 92vw, 340px"
+                  className="object-cover object-[62%_center] transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_11_8_/_0.04),rgb(17_11_8_/_0.95)_88%)]" />
+                <div className="absolute inset-x-7 bottom-7 z-10">
                   <span className="font-ethiopic text-lg text-gold">ጉርሻ</span>
                   <h3 className="mt-3 font-display text-2xl text-injera">
                     Gursha is a gesture of care.
@@ -109,32 +123,5 @@ function BunaScene({ reduced }: { reduced: boolean }) {
       <Image src="/images/buna-ceremony-v2.webp" alt="" fill sizes="(max-width: 1024px) 92vw, 680px" className="object-cover object-center" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(20_12_8_/_0.95)_0%,rgb(20_12_8_/_0.72)_52%,rgb(20_12_8_/_0.18)_100%)]" />
     </motion.div>
-  );
-}
-
-function InjeraMotif() {
-  return (
-    <div aria-hidden="true" className="absolute -right-14 -top-14 h-48 w-48 rounded-full border border-injera/10 bg-injera/[0.04]">
-      <div className="injera-texture absolute inset-3 rounded-full" />
-      <div className="absolute inset-7 rounded-full border border-teal/20" />
-    </div>
-  );
-}
-
-function GurshaMark() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 160 160"
-      className="absolute -right-6 -top-5 h-40 w-40 text-gold opacity-15"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="4"
-      strokeLinecap="round"
-    >
-      <path d="M23 113c27-2 38-25 47-46 7-17 16-31 27-25 9 5 1 19-5 31" />
-      <path d="M64 110c25-1 42-15 53-34 8-14 20-25 29-17 8 7-4 20-12 29-17 20-27 39-57 45" />
-      <path d="M64 74c-7-13-19-24-28-16-8 8 5 20 14 30" />
-    </svg>
   );
 }
