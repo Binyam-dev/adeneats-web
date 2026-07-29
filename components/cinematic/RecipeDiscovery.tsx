@@ -54,7 +54,7 @@ export default function RecipeDiscovery() {
               alt={dish.alt}
               fill
               sizes="(max-width: 640px) 84vw, (max-width: 1024px) 68vw, 38vw"
-              className="object-cover transition duration-700 ease-out group-hover:scale-110"
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-110 motion-reduce:group-hover:scale-100"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,rgb(14_8_6_/_0.94)_100%)]" />
             <span className="absolute right-6 top-6 rounded-full border border-injera/20 bg-black/25 px-4 py-2 font-ethiopic text-gold backdrop-blur-md">{dish.fidel}</span>

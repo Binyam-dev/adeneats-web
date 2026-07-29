@@ -32,7 +32,7 @@ export default function HumanPayoffScene() {
                 alt="A local Ethiopian home cook smiling in her kitchen"
                 fill
                 sizes="(max-width: 1024px) 92vw, 520px"
-                className="object-cover object-center transition duration-700 hover:scale-105"
+                className="object-cover object-center transition-transform duration-500 hover:scale-105 motion-reduce:hover:scale-100"
               />
             </div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">Cook’s home · demonstration</p>
@@ -69,7 +69,7 @@ export default function HumanPayoffScene() {
                 alt="A colorful Ethiopian beyaynetu meal arranged on injera"
                 fill
                 sizes="(max-width: 1024px) 92vw, 520px"
-                className="object-cover transition duration-700 hover:scale-105"
+                className="object-cover transition-transform duration-500 hover:scale-105 motion-reduce:hover:scale-100"
               />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgb(17_11_8_/_0.35))]" />
             </div>

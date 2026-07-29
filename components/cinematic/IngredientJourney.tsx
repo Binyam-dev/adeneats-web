@@ -89,12 +89,12 @@ export default function IngredientJourney() {
                   alt={ingredient.alt}
                   fill
                   sizes="(max-width: 640px) calc(100vw - 2.5rem), (max-width: 1024px) 50vw, 23rem"
-                  className="object-cover transition duration-700 ease-out group-hover:scale-[1.06]"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06] motion-reduce:group-hover:scale-100"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_11_8_/_0.06)_18%,rgb(17_11_8_/_0.48)_48%,rgb(17_11_8_/_0.97)_100%)]" />
                 <div
                   aria-hidden="true"
-                  className="absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-25 blur-3xl transition-transform duration-700 group-hover:scale-150"
+                  className="absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-25 blur-3xl transition-transform duration-500 group-hover:scale-150 motion-reduce:group-hover:scale-100"
                   style={{ background: ingredient.color }}
                 />
                 <span className="absolute left-7 top-7 rounded-full border border-injera/20 bg-black/30 px-3 py-1.5 font-display text-sm text-injera/70 backdrop-blur-md">

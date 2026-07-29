@@ -66,7 +66,7 @@ export default function CulturalStory() {
                   alt="Fresh injera folded in a traditional woven basket"
                   fill
                   sizes="(max-width: 640px) 92vw, 340px"
-                  className="object-cover transition duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_11_8_/_0.08),rgb(17_11_8_/_0.94)_86%)]" />
                 <div className="absolute inset-x-7 bottom-7 z-10">
@@ -91,7 +91,7 @@ export default function CulturalStory() {
                   alt="An Ethiopian woman offering a gursha bite to a loved one at home"
                   fill
                   sizes="(max-width: 640px) 92vw, 340px"
-                  className="object-cover object-[62%_center] transition duration-700 group-hover:scale-105"
+                  className="object-cover object-[62%_center] transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_11_8_/_0.04),rgb(17_11_8_/_0.95)_88%)]" />
                 <div className="absolute inset-x-7 bottom-7 z-10">

@@ -27,7 +27,7 @@ export default function Nav({ appStoreUrl }: { appStoreUrl?: string }) {
   }, []);
 
   return (
-    <div className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || open ? "border-b border-injera/10 bg-[rgb(18_11_8_/_0.9)] shadow-2xl backdrop-blur-xl" : "bg-gradient-to-b from-black/60 to-transparent"}`}>
+    <div className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 ${scrolled || open ? "border-b border-injera/10 bg-[rgb(18_11_8_/_0.9)] shadow-2xl backdrop-blur-xl" : "bg-gradient-to-b from-black/60 to-transparent"}`}>
       <nav aria-label="Primary navigation">
         <Container className="flex min-h-[4.8rem] items-center justify-between gap-5">
           <Link href="/" className="group inline-flex min-h-11 items-center gap-3 font-display text-2xl font-semibold tracking-tight text-injera">
