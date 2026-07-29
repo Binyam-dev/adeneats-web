@@ -122,12 +122,12 @@ export default function WaitlistForm({ role }: { role: WaitlistRole }) {
         setStatus(result.status);
         setMessage(
           result.status === "existing"
-            ? "You're already on the list — we haven't forgotten you."
+            ? "You're already on the list. We haven't forgotten you."
             : result.emailConfirmation !== "sent"
               ? "You're on the list. We'll email you when Aden Eats is live."
             : role === "cook"
-              ? "You're on the list. Check your inbox for confirmation — we'll email you as onboarding opens."
-              : "You're on the list. Check your inbox for confirmation — we'll email you when Aden Eats is live.",
+              ? "You're on the list. Check your inbox for confirmation. We'll email you as onboarding opens."
+              : "You're on the list. Check your inbox for confirmation. We'll email you when Aden Eats is live.",
         );
         return;
       }

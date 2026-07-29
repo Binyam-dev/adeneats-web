@@ -14,7 +14,7 @@ const steps: { icon: StepIconName; tint: string; title: string; body: string }[]
     icon: "bowl",
     tint: "bg-berbere-tint",
     title: "Choose real home cooking",
-    body: "At launch, choose your dishes, spice level, and pickup time in the app — with 100% of every tip going to your cook.",
+    body: "At launch, choose your dishes, spice level, and pickup time in the app. Your cook receives 100% of every tip.",
   },
   {
     icon: "handshake",
@@ -37,7 +37,7 @@ export default function HowItWorks() {
           </h2>
           <p className="mt-4 max-w-[56ch] text-injera-dim">
             No restaurant markup, no shortcuts on tradition. Just the food
-            you grew up with — or the food you&apos;ve been meaning to fall
+            you grew up with, or the food you&apos;ve been meaning to fall
             in love with.
           </p>
         </Reveal>

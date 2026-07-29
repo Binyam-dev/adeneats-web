@@ -74,7 +74,6 @@ export default function Hero({ appStoreUrl }: { appStoreUrl?: string }) {
             className="mb-7 flex items-center gap-4"
           >
             <span className="font-ethiopic text-xl text-gold">እንኳን ደህና መጡ</span>
-            <span className="h-px w-14 bg-gold/60" />
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-injera-dim">
               Coming to the DMV
             </span>
@@ -110,7 +109,7 @@ export default function Hero({ appStoreUrl }: { appStoreUrl?: string }) {
             <span className="absolute left-[4%] top-[24%] h-4 w-4 rounded-[70%_30%_70%_30%] bg-[#62864a] shadow-[0_0_24px_rgb(98_134_74_/_0.7)]" />
             <span className="absolute bottom-[12%] right-[18%] h-3 w-3 rounded-full bg-berbere shadow-[0_0_22px_rgb(196_59_30_/_0.8)]" />
           </div>
-          <div className="hero-orbit hero-orbit-reverse absolute left-1/2 top-1/2 h-[27rem] w-[27rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-injera/15" />
+          <div className="hero-orbit hero-orbit-reverse absolute left-1/2 top-1/2 h-[27rem] w-[27rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-injera/10" />
 
           <motion.div
             style={{
@@ -153,8 +152,7 @@ export default function Hero({ appStoreUrl }: { appStoreUrl?: string }) {
         </div>
       </Container>
 
-      <div className="absolute bottom-7 right-7 hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-injera/65 sm:flex">
-        <span className="hero-scroll-line h-px w-16 bg-injera/40" />
+      <div className="absolute bottom-7 right-7 hidden items-center text-xs uppercase tracking-[0.2em] text-injera/65 sm:flex">
         Scroll to taste
       </div>
     </header>

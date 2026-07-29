@@ -33,7 +33,7 @@ const recipeDetails: Record<
   },
   "awaze-tibs": {
     cookNote:
-      "The pan announces this one first—beef seared hot with awaze, onion, jalapeño, and rosemary.",
+      "The pan announces this one first. Beef is seared hot with awaze, onion, jalapeño, and rosemary.",
     ingredients: [
       { name: "Awaze", image: "/images/ingredients/berbere.webp", motion: "spice" },
       { name: "Onion", image: "/images/ingredients/slow-cooked-onions.webp", motion: "layer" },
@@ -400,8 +400,7 @@ export default function RecipeDiscovery() {
       </div>
 
       {!reduced && (
-        <div className="pointer-events-none absolute bottom-5 right-5 z-30 hidden items-center gap-3 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-injera/35 sm:flex">
-          <span className="h-px w-10 bg-injera/20" />
+        <div className="pointer-events-none absolute bottom-5 right-5 z-30 hidden items-center text-[0.6rem] font-bold uppercase tracking-[0.18em] text-injera/35 sm:flex">
           Four dishes · one long table
         </div>
       )}

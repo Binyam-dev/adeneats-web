@@ -32,7 +32,7 @@ export default function CulturalStory() {
               <div className="mt-10 flex items-center gap-4 border-t border-border pt-6">
                 <span className="font-ethiopic text-3xl text-gold">እንብላ</span>
                 <span className="text-sm text-injera-dim">
-                  Enbela — let&apos;s eat.
+                  Enbela. Let&apos;s eat.
                 </span>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function CulturalStory() {
                     Injera holds the table together.
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-injera-dim">
-                    Tangy, soft, and made to be shared—it is plate, utensil,
+                    Tangy, soft, and made to be shared. It is plate, utensil,
                     and the heart of the meal.
                   </p>
                 </div>

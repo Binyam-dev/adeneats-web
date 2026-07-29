@@ -17,7 +17,7 @@ export default function WaitlistSection() {
               Not in the DMV yet?
             </h2>
             <p className="mx-auto mt-3.5 max-w-[56ch] text-injera-dim">
-              We&apos;re starting in DC, Maryland, and Virginia — but Aden
+              We&apos;re starting in DC, Maryland, and Virginia. Aden
               Eats is built for every Habesha community in America. Tell us
               where you are and we&apos;ll let you know the moment we
               arrive.
@@ -26,7 +26,7 @@ export default function WaitlistSection() {
               <WaitlistForm role="client" />
             </div>
             <p className="mt-4 text-sm text-injera-dim">
-              Cooks welcome too —{" "}
+              Cooks are welcome too.{" "}
               <a href="/cooks" className="text-teal underline underline-offset-2">
                 tell us your city
               </a>{" "}

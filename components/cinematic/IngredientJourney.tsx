@@ -104,8 +104,7 @@ export default function IngredientJourney() {
                   <span className="block font-ethiopic text-3xl text-gold">{ingredient.fidel}</span>
                   <h3 className="mt-2 font-display text-4xl text-injera">{ingredient.name}</h3>
                   <p className="mt-3 leading-relaxed text-injera-dim">{ingredient.note}</p>
-                  <div className="mt-5 flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-injera/45">
-                    <span className="h-px flex-1 bg-injera/15" />
+                  <div className="mt-5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-injera/45">
                     Part of the table
                   </div>
                 </div>

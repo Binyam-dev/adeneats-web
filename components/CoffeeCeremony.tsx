@@ -10,7 +10,7 @@ const stages = [
     id: "roast",
     fidel: "ቡና መቁላት",
     title: "Roast",
-    body: "Green coffee beans are washed and roasted until their aroma fills the room—an invitation before the first cup is poured.",
+    body: "Green coffee beans are washed and roasted until their aroma fills the room. It is an invitation before the first cup is poured.",
   },
   {
     id: "brew",
