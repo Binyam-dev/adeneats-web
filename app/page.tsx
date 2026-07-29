@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import FidelMarquee from "@/components/FidelMarquee";
 import CulturalStory from "@/components/CulturalStory";
+import CoffeeCeremony from "@/components/CoffeeCeremony";
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -41,6 +42,7 @@ export default function Home() {
         <HowItWorks />
         <DishGrid />
         <CulturalStory />
+        <CoffeeCeremony />
         <CookTeaser />
         <WaitlistSection />
       </main>

@@ -24,6 +24,7 @@ See `.env.example`.
 | `NEXT_PUBLIC_SUPABASE_URL`       | Supabase API URL                          | yes                      |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | read-only public ordering preview         | yes                      |
 | `SUPABASE_SERVICE_ROLE_KEY`      | server-only waitlist insert route         | yes for waitlist         |
+| `ADMIN_EMAILS`                   | comma-separated `/admin` allowlist       | yes for admin            |
 | `APP_STORE_URL`                  | server-rendered into "Get the app" links | no — falls back to the waitlist form until it's set |
 
 ## Supabase setup
@@ -83,7 +84,10 @@ later without restructuring what's here.
 
 ## Ordering data (Phase 2, slice 1)
 
-`/order` is a **read-only preview** — no cart, checkout, or payments. The
+`/order` is an interactive marketplace preview with menu search, fasting
+filters, public cook profiles, and a browser-persisted basket. No payment is
+captured on the website; final ordering and pickup confirmation remain in the
+app. The
 site's own copy already positions the app as where ordering and cook menu
 management happen ("manage your kitchen from the app"), so this slice only
 gives cook listings a home in Supabase and lets the website show them.
@@ -103,13 +107,11 @@ creates `public.cook_listings` and `public.menu_items`, with RLS that lets
 the anon key `SELECT` published listings and their available items only —
 same insert/update/delete-denied-by-default pattern as `launch_waitlist.sql`.
 
-There's no admin UI yet, so listing/menu rows are entered manually
-(Supabase dashboard or SQL editor, which bypasses RLS via `service_role`)
-once a cook clears the vetting flow described on `/cooks`.
-
-Cart, checkout, payments, and cook/customer accounts are explicitly out of
-scope until there's a decision on whether any of that lives on the website
-at all, versus staying app-exclusive.
+The `/admin` kitchen desk uses Supabase passwordless email authentication.
+Every admin API call verifies the access token and requires the authenticated
+email to appear in the server-only `ADMIN_EMAILS` allowlist. Listings are
+created as drafts and can be published only by an authorized administrator.
+Apply `supabase/ordering.sql` before using either marketplace or admin route.
 
 ## Copy decisions
 

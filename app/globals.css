@@ -174,6 +174,21 @@ body {
   animation-delay: 2.2s;
 }
 
+.coffee-art-steam {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  width: 2px;
+  height: 4.5rem;
+  border-radius: 999px;
+  background: linear-gradient(to top, transparent, rgb(245 235 220 / 0.5), transparent);
+  filter: blur(1px);
+  animation: buna-steam 4s ease-in-out infinite;
+}
+
+.coffee-art-steam-a { margin-left: -1.2rem; }
+.coffee-art-steam-b { margin-left: 1.2rem; animation-delay: 1.6s; }
+
 button,
 a,
 summary {
@@ -194,6 +209,10 @@ summary {
   .steam-wisp,
   .hero-orbit,
   .buna-steam {
+    animation: none !important;
+  }
+
+  .coffee-art-steam {
     animation: none !important;
   }
 }
