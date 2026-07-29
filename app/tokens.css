@@ -12,8 +12,8 @@
   /* ---------- Anchor brand colors (named once; everything else derives from these) ---------- */
   --color-teff: #231812;        /* deep roasted brown — page background, nearly every section */
   --color-injera: #f5ebdc;      /* injera cream — primary text on dark */
-  --color-teal: #1d9e75;        /* brand teal — primary buttons, links, "cook" accents */
-  --color-teal-deep: #0f6b4e;   /* gradient stops, deep hover state */
+  --color-teal: #b94b2c;        /* warm clay — retained token name for compatibility */
+  --color-teal-deep: #7d2d1b;
   --color-berbere: #c43b1e;     /* berbere red-orange — spice/heat accent, dish photo treatments */
   --color-error: #ff8f73;        /* accessible error text on teff surfaces */
   --color-gold: #e2a93b;        /* niter kibbeh gold — tibeb pattern, fidel accents, cook CTA */
@@ -30,9 +30,9 @@
   --color-gold-tint: rgb(226 169 59 / 0.16);
 
   /* ---------- Type families ---------- */
-  --font-display: var(--font-display), Georgia, serif;        /* Fraunces — hero, section titles, dish names */
+  --font-display: var(--font-aden-serif), Georgia, serif;
   --font-body: var(--font-body), system-ui, sans-serif;        /* Work Sans — everything else */
-  --font-ethiopic: var(--font-ethiopic), serif;                 /* Noto Serif Ethiopic — Fidel accents only */
+  --font-ethiopic: var(--font-aden-serif), serif;
 
   /* ---------- Display type scale (Fraunces) ---------- */
   --text-hero: 3rem;            /* mobile hero headline; scales up via responsive classes */

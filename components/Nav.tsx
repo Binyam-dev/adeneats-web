@@ -1,23 +1,23 @@
 import Link from "next/link";
 import Container from "./Container";
-import TibebBand from "./TibebBand";
 
 export default function Nav({ appStoreUrl }: { appStoreUrl?: string }) {
   void appStoreUrl;
   return (
-    <div className="sticky top-0 z-50">
-      <nav className="bg-teff/90 backdrop-blur-md">
+    <div className="sticky top-0 z-50 border-b border-injera/10">
+      <nav className="bg-[rgb(18_11_8_/_0.82)] backdrop-blur-xl">
         <Container className="py-3 sm:flex sm:items-center sm:justify-between sm:py-4">
           <div className="flex items-center justify-between gap-4">
             <Link
               href="/"
-              className="inline-flex min-h-11 items-center font-display text-2xl font-semibold tracking-tight text-injera"
+              className="group inline-flex min-h-11 items-center gap-3 font-display text-2xl font-semibold tracking-tight text-injera"
             >
-              Aden<span className="text-teal"> Eats</span>
+              <span className="grid h-9 w-9 place-items-center rounded-full border border-gold/45 font-ethiopic text-sm text-gold transition-transform group-hover:rotate-[-8deg]">አ</span>
+              <span>Aden <em className="not-italic text-gold">Eats</em></span>
             </Link>
             <Link
               href="/#waitlist"
-              className="inline-flex min-h-11 items-center rounded-full bg-teal px-5 py-2.5 text-sm font-semibold text-injera shadow-[0_6px_24px_rgb(29_158_117_/_0.3)] transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-teal-deep"
+              className="inline-flex min-h-11 items-center rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-teff shadow-[0_8px_28px_rgb(226_169_59_/_0.22)] transition-transform hover:-translate-y-0.5"
             >
               Join the waitlist
             </Link>
@@ -40,7 +40,6 @@ export default function Nav({ appStoreUrl }: { appStoreUrl?: string }) {
           </div>
         </Container>
       </nav>
-      <TibebBand animateOnMount />
     </div>
   );
 }

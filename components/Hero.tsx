@@ -1,125 +1,91 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Container from "./Container";
-import FoodHero3D from "./FoodHero3D";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-function FadeUp({
-  children,
-  delay,
-  reduced,
-}: {
-  children: React.ReactNode;
-  delay: number;
-  reduced: boolean | null;
-}) {
-  return (
-    <motion.div
-      initial={reduced ? false : { opacity: 0, y: 26 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay, ease: EASE }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export default function Hero({
-  appStoreUrl,
-}: {
-  appStoreUrl?: string;
-}) {
+export default function Hero({ appStoreUrl }: { appStoreUrl?: string }) {
   void appStoreUrl;
-  const prefersReducedMotion = useReducedMotion();
+  const reduced = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "14%"]);
 
   return (
-    <header className="relative flex min-h-[85vh] items-center overflow-hidden">
-      {/* radial color wash + injera-dot texture, matching the mockup's hero-bg */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 70% at 78% 30%, rgb(196 59 30 / 0.34), transparent 60%)," +
-            "radial-gradient(ellipse 60% 50% at 20% 80%, rgb(29 158 117 / 0.22), transparent 60%)," +
-            "radial-gradient(ellipse 45% 40% at 60% 85%, rgb(226 169 59 / 0.16), transparent 60%)," +
-            "var(--color-teff)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.14]"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgb(245 235 220 / 0.5) 1px, transparent 1.6px)",
-          backgroundSize: "22px 22px",
-        }}
-      />
+    <header ref={ref} className="relative min-h-[92svh] overflow-hidden bg-teff">
+      <motion.div className="absolute -inset-y-[10%] inset-x-0" style={{ y: imageY }}>
+        <Image
+          src="/images/hero-cinematic-v2.webp"
+          alt="A home-cooked Ethiopian communal feast served on injera in a woven gebeta"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[68%_center]"
+        />
+      </motion.div>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(15_9_6_/_0.98)_0%,rgb(15_9_6_/_0.9)_33%,rgb(15_9_6_/_0.45)_58%,rgb(15_9_6_/_0.08)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(0deg,var(--color-teff)_0%,transparent_28%,rgb(0_0_0_/_0.18)_100%)]" />
+      <div aria-hidden="true" className="hero-grain absolute inset-0 opacity-30" />
+      <div aria-hidden="true" className="hero-ember hero-ember-one" />
+      <div aria-hidden="true" className="hero-ember hero-ember-two" />
 
-      <Container className="relative z-10 py-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <FadeUp delay={0.1} reduced={prefersReducedMotion}>
-              <div className="mb-6 inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.18em] text-gold">
-                <span className="h-px w-8 bg-gold" aria-hidden="true" />
-                Serving the DMV
-              </div>
-            </FadeUp>
-            <FadeUp delay={0.2} reduced={prefersReducedMotion}>
-              <p className="font-ethiopic mb-5 text-xl text-gold">
-                እንኳን ደህና መጡ
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.3} reduced={prefersReducedMotion}>
-              <h1 className="max-w-[13ch] text-hero font-display text-injera sm:text-[3.6rem] lg:text-[4.2rem]">
-                Home-cooked Habesha food, made by{" "}
-                <em className="font-bold not-italic text-teal">
-                  your neighbors
-                </em>
-                .
-              </h1>
-            </FadeUp>
-            <FadeUp delay={0.4} reduced={prefersReducedMotion}>
-              <p className="mt-6 max-w-[46ch] text-[1.05rem] text-injera-dim">
-                Real Doro Wat. Real injera. Real home kitchens. Aden Eats
-                connects you with vetted Ethiopian &amp; Eritrean home cooks
-                in your community. We&apos;re building the table now.
-              </p>
-            </FadeUp>
-            <FadeUp delay={0.5} reduced={prefersReducedMotion}>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Link
-                  href="/#waitlist"
-                  className="rounded-full bg-teal px-7 py-3.5 font-medium text-injera shadow-[0_6px_24px_rgb(29_158_117_/_0.35)] transition-transform hover:-translate-y-0.5"
-                >
-                  Join the waitlist
-                </Link>
-                <Link
-                  href="/cooks"
-                  className="rounded-full border border-injera/35 px-7 py-3.5 font-medium text-injera transition-transform hover:-translate-y-0.5"
-                >
-                  Cook with Aden
-                </Link>
-              </div>
-              <p className="mt-4 text-xs uppercase tracking-[0.1em] text-injera-dim/70">
-                Coming soon to the DMV
-              </p>
-            </FadeUp>
-          </div>
-
+      <Container className="relative flex min-h-[92svh] items-center py-24">
+        <div className="max-w-[45rem]">
           <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.92, rotate: -4 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
-            className="relative"
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="mb-7 flex items-center gap-4"
           >
-            <FoodHero3D />
+            <span className="font-ethiopic text-xl text-gold">እንኳን ደህና መጡ</span>
+            <span className="h-px w-14 bg-gold/60" />
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-injera-dim">
+              Coming to the DMV
+            </span>
+          </motion.div>
+          <motion.h1
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.1 }}
+            className="max-w-[10ch] font-display text-[clamp(3.8rem,8.4vw,7.6rem)] leading-[0.88] tracking-[-0.045em] text-injera"
+          >
+            Home is a <span className="italic text-gold">flavor.</span>
+          </motion.h1>
+          <motion.p
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.24 }}
+            className="mt-8 max-w-[38rem] text-lg leading-relaxed text-injera-dim sm:text-xl"
+          >
+            Aden Eats is bringing authentic Ethiopian and Eritrean food from
+            gifted home cooks to neighbors across the DMV.
+          </motion.p>
+          <motion.div
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.36 }}
+            className="mt-10 flex flex-wrap gap-4"
+          >
+            <Link href="#waitlist" className="magnetic-cta inline-flex min-h-14 items-center rounded-full bg-gold px-8 font-bold text-teff shadow-[0_18px_55px_rgb(226_169_59_/_0.28)]">
+              Save my place
+              <span aria-hidden="true" className="ml-3 text-xl">↗</span>
+            </Link>
+            <Link href="#story" className="inline-flex min-h-14 items-center rounded-full border border-injera/30 bg-black/10 px-8 font-semibold text-injera backdrop-blur-md transition hover:border-injera/60 hover:bg-injera/10">
+              Enter the story
+            </Link>
           </motion.div>
         </div>
       </Container>
+
+      <div className="absolute bottom-7 right-7 hidden items-center gap-3 text-xs uppercase tracking-[0.2em] text-injera/65 sm:flex">
+        <span className="hero-scroll-line h-px w-16 bg-injera/40" />
+        Scroll to taste
+      </div>
     </header>
   );
 }

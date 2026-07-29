@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import Container from "./Container";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -99,25 +100,15 @@ export default function CulturalStory() {
 
 function BunaScene({ reduced }: { reduced: boolean }) {
   return (
-    <div aria-hidden="true" className="absolute inset-y-0 right-0 w-[48%] min-w-48 opacity-35 sm:opacity-100">
-      <motion.svg
-        viewBox="0 0 320 320"
-        className="absolute bottom-[-3rem] right-[-3rem] w-[22rem] max-w-none text-berbere"
-        animate={reduced ? undefined : { y: [0, -5, 0], rotate: [0, 1, 0] }}
-        transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
-      >
-        <ellipse cx="170" cy="271" rx="98" ry="20" fill="rgb(0 0 0 / .22)" />
-        <path d="M125 89c0-31 24-55 54-55s54 24 54 55v25h-108V89Z" fill="#e2a93b" opacity=".9" />
-        <path d="M112 111h133l-13 127c-2 20-19 35-39 35h-29c-21 0-38-16-40-37l-12-125Z" fill="#7a2412" />
-        <path d="M238 130c53-13 66 17 42 36-14 11-28 8-42 2" fill="none" stroke="#e2a93b" strokeWidth="11" strokeLinecap="round" />
-        <path d="M140 139c24 10 51 10 76 0" fill="none" stroke="#e2a93b" strokeWidth="5" opacity=".7" />
-        <path d="M151 188c17 8 38 8 55 0" fill="none" stroke="#e2a93b" strokeWidth="5" opacity=".55" />
-        <circle cx="179" cy="86" r="10" fill="#231812" />
-      </motion.svg>
-      <span className="buna-steam buna-steam-one" />
-      <span className="buna-steam buna-steam-two" />
-      <span className="buna-steam buna-steam-three" />
-    </div>
+    <motion.div
+      aria-hidden="true"
+      className="absolute inset-0"
+      animate={reduced ? undefined : { scale: [1, 1.025, 1] }}
+      transition={{ duration: 10, ease: "easeInOut", repeat: Infinity }}
+    >
+      <Image src="/images/buna-ceremony-v2.webp" alt="" fill sizes="(max-width: 1024px) 92vw, 680px" className="object-cover object-center" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(20_12_8_/_0.95)_0%,rgb(20_12_8_/_0.72)_52%,rgb(20_12_8_/_0.18)_100%)]" />
+    </motion.div>
   );
 }
 

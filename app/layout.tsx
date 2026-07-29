@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
-import { Fraunces, Work_Sans, Noto_Serif_Ethiopic } from "next/font/google";
+import { Work_Sans, Noto_Serif_Ethiopic } from "next/font/google";
 import "./globals.css";
-
-const fraunces = Fraunces({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 const workSans = Work_Sans({
   variable: "--font-body",
@@ -18,8 +10,8 @@ const workSans = Work_Sans({
 });
 
 const notoSerifEthiopic = Noto_Serif_Ethiopic({
-  variable: "--font-ethiopic",
-  subsets: ["ethiopic"],
+  variable: "--font-aden-serif",
+  subsets: ["ethiopic", "latin"],
   weight: ["500", "600"],
   display: "swap",
 });
@@ -57,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${workSans.variable} ${notoSerifEthiopic.variable} h-full antialiased`}
+      className={`${workSans.variable} ${notoSerifEthiopic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-teff text-injera font-body">
         {children}

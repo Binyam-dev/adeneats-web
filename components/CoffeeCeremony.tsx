@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import Container from "./Container";
 
 const stages = [
@@ -87,47 +88,41 @@ export default function CoffeeCeremony() {
 
 function CoffeeStageArt({ stage, reduced }: { stage: number; reduced: boolean }) {
   return (
-    <div aria-hidden="true" className="relative mx-auto aspect-square w-full max-w-[28rem]">
-      <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle,rgb(226_169_59_/_0.16),transparent_65%)] blur-xl" />
+    <motion.div
+      aria-hidden="true"
+      className="group relative mx-auto aspect-[3/4] w-full max-w-[31rem] [perspective:1100px]"
+      whileHover={reduced ? undefined : { rotateY: -2.5, rotateX: 1.5, scale: 1.015 }}
+      transition={{ duration: 0.45 }}
+    >
       <motion.div
-        className="absolute inset-[13%] rounded-full border border-gold/20"
-        animate={reduced ? undefined : { rotate: 360 }}
-        transition={{ duration: 36, ease: "linear", repeat: Infinity }}
+        className="absolute inset-0 overflow-hidden rounded-[2.2rem] border border-gold/20 shadow-[0_38px_100px_rgb(0_0_0_/_0.48)]"
+        animate={reduced ? undefined : { y: [0, -6, 0] }}
+        transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
       >
-        {Array.from({ length: 12 }).map((_, index) => (
-          <span
-            key={index}
-            className="absolute left-1/2 top-1/2 h-2.5 w-1.5 rounded-[50%_50%_45%_45%] bg-berbere"
-            style={{ transform: `rotate(${index * 30}deg) translateY(-10.3rem) rotate(22deg)` }}
-          />
-        ))}
+        <Image
+          src="/images/buna-ceremony-v2.webp"
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 90vw, 500px"
+          className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.035]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgb(18_11_8_/_0.88)_100%)]" />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={stage}
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="absolute inset-x-6 bottom-6 flex items-end justify-between"
+          >
+            <span className="font-ethiopic text-3xl text-gold">{stages[stage].fidel}</span>
+            <span className="rounded-full border border-injera/25 bg-teff/55 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-injera backdrop-blur-md">
+              {stages[stage].title}
+            </span>
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
-      <svg viewBox="0 0 360 360" className="absolute inset-0 h-full w-full">
-        <ellipse cx="180" cy="303" rx="112" ry="18" fill="rgb(0 0 0 / .25)" />
-        <motion.g
-          animate={reduced ? undefined : stage === 1 ? { y: [0, -4, 0] } : { y: 0 }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <path d="M124 104h112l-12 153c-2 25-23 44-48 44h-1c-25 0-46-20-48-45l-3-152Z" fill="#7a2412" />
-          <path d="M136 104c0-35 18-60 45-60s45 25 45 60" fill="#e2a93b" />
-          <path d="M230 137c59-12 73 25 42 46-13 9-27 9-43 4" fill="none" stroke="#e2a93b" strokeWidth="12" strokeLinecap="round" />
-          <path d="M145 157c24 9 48 9 72 0M148 211c22 8 43 8 65 0" fill="none" stroke="#e2a93b" strokeWidth="5" opacity=".65" />
-          <circle cx="181" cy="97" r="10" fill="#231812" />
-        </motion.g>
-        {stage === 2 && (
-          <motion.path
-            d="M252 180c32 5 45 23 50 46"
-            fill="none"
-            stroke="#e2a93b"
-            strokeWidth="5"
-            strokeLinecap="round"
-            initial={reduced ? false : { pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-          />
-        )}
-      </svg>
-      {stage !== 0 && <span className="coffee-art-steam coffee-art-steam-a" />}
-      {stage !== 0 && <span className="coffee-art-steam coffee-art-steam-b" />}
-    </div>
+      <div className="absolute -inset-5 -z-10 rounded-[2.8rem] bg-[radial-gradient(circle_at_60%_40%,rgb(226_169_59_/_0.2),transparent_68%)] blur-2xl" />
+    </motion.div>
   );
 }

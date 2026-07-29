@@ -39,7 +39,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero appStoreUrl={appStoreUrl} />
         <FidelMarquee />
-        <HowItWorks />
+        <div id="story"><HowItWorks /></div>
         <DishGrid />
         <CulturalStory />
         <CoffeeCeremony />

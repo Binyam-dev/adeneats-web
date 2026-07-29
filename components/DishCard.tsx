@@ -14,8 +14,8 @@ export default function DishCard({
 
   return (
     <TiltCard
-      maxTilt={5}
-      className="group h-full overflow-visible rounded-[var(--radius-card)] transition-[transform,filter] duration-300 hover:-translate-y-1 hover:drop-shadow-[0_18px_24px_rgb(0_0_0_/_0.28)]"
+      maxTilt={7}
+      className="group h-full overflow-visible rounded-[var(--radius-card)] transition-[transform,filter] duration-500 hover:-translate-y-2 hover:drop-shadow-[0_32px_44px_rgb(0_0_0_/_0.42)]"
     >
       <button
         type="button"
@@ -29,7 +29,7 @@ export default function DishCard({
         {/* Front — the illustration and dish details */}
         <div
           aria-hidden={revealed}
-          className="overflow-hidden rounded-[var(--radius-card)] border border-border bg-teff-panel [backface-visibility:hidden]"
+          className="overflow-hidden rounded-[var(--radius-card)] border border-border bg-teff-panel shadow-[inset_0_1px_0_rgb(255_255_255_/_0.04)] [backface-visibility:hidden]"
           style={{ transform: "rotateY(0deg)" }}
         >
           <div className="relative aspect-[4/3] overflow-hidden">
@@ -38,9 +38,10 @@ export default function DishCard({
               alt={dish.alt}
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 350px"
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.085]"
             />
             <span aria-hidden="true" className="food-card-shine absolute inset-0" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_52%,rgb(20_12_8_/_0.64)_100%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
           <div className="p-6">
             <div className="mb-2 flex items-baseline justify-between gap-2.5">
