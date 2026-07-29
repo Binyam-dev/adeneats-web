@@ -319,13 +319,110 @@ summary {
   -webkit-tap-highlight-color: transparent;
 }
 
-.recipe-rail {
-  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
-  overscroll-behavior-inline: contain;
+.recipe-grain {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgb(245 235 220 / 0.7) 0 0.7px, transparent 0.9px),
+    radial-gradient(circle at 70% 65%, rgb(226 169 59 / 0.55) 0 0.6px, transparent 0.8px);
+  background-size: 17px 17px, 23px 23px;
 }
 
-.recipe-rail article:nth-child(even) {
-  margin-top: 1.8rem;
+.recipe-steam {
+  position: absolute;
+  left: 50%;
+  top: -5%;
+  width: 5px;
+  height: 25%;
+  border-radius: 999px;
+  background: linear-gradient(to top, transparent, rgb(245 235 220 / 0.5), transparent);
+  filter: blur(3px);
+  opacity: 0.58;
+  transform-origin: 50% 100%;
+  animation: recipe-steam 4.2s ease-in-out infinite;
+}
+
+.recipe-steam-a { margin-left: -14%; }
+.recipe-steam-b { margin-left: 2%; animation-delay: -1.35s; height: 31%; }
+.recipe-steam-c { margin-left: 16%; animation-delay: -2.6s; height: 22%; }
+
+.recipe-ingredient {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.recipe-ingredient-1 { left: -2%; top: 9%; }
+.recipe-ingredient-2 { right: -3%; top: 17%; }
+.recipe-ingredient-3 { bottom: 4%; left: 3%; }
+.recipe-ingredient-4 { bottom: 7%; right: 1%; }
+
+.recipe-ingredient[data-motion="grain"] {
+  animation: recipe-grain-drift 5.8s ease-in-out infinite;
+}
+
+.recipe-ingredient[data-motion="layer"] {
+  animation: recipe-layer-turn 7s ease-in-out infinite;
+}
+
+.recipe-ingredient[data-motion="herb"] {
+  animation: recipe-herb-drift 5.2s ease-in-out infinite;
+}
+
+.recipe-ingredient[data-motion="injera"] {
+  animation: recipe-injera-unfold 6.5s ease-in-out infinite;
+}
+
+.recipe-spice-particles::before,
+.recipe-spice-particles::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: var(--color-berbere);
+  box-shadow:
+    17px -8px 0 -1px rgb(196 59 30 / 0.7),
+    28px 15px 0 -2px rgb(226 169 59 / 0.65),
+    -8px 19px 0 -1px rgb(196 59 30 / 0.55);
+  width: 5px;
+  height: 5px;
+  animation: recipe-spice 3.6s ease-in-out infinite;
+}
+
+.recipe-spice-particles::before { left: -7px; top: 12px; }
+.recipe-spice-particles::after { bottom: -3px; right: 9px; animation-delay: -1.8s; }
+
+@keyframes recipe-steam {
+  0% { opacity: 0; transform: translate3d(0, 18px, 0) scaleY(0.72) rotate(-3deg); }
+  28% { opacity: 0.58; }
+  72% { opacity: 0.24; }
+  100% { opacity: 0; transform: translate3d(12px, -55px, 0) scaleY(1.15) rotate(6deg); }
+}
+
+@keyframes recipe-grain-drift {
+  0%, 100% { transform: translate3d(0, 0, 20px) rotate(-2deg); }
+  50% { transform: translate3d(5px, -9px, 45px) rotate(4deg); }
+}
+
+@keyframes recipe-layer-turn {
+  0%, 100% { transform: translate3d(0, 0, 32px) rotate(-4deg); }
+  50% { transform: translate3d(-6px, -5px, 60px) rotate(7deg); }
+}
+
+@keyframes recipe-herb-drift {
+  0%, 100% { transform: translate3d(0, 0, 18px) rotate(3deg); }
+  50% { transform: translate3d(9px, -12px, 52px) rotate(-8deg); }
+}
+
+@keyframes recipe-injera-unfold {
+  0%, 100% { transform: translate3d(0, 0, 24px) rotate(-3deg) scaleX(0.96); }
+  50% { transform: translate3d(-5px, -7px, 48px) rotate(3deg) scaleX(1.04); }
+}
+
+@keyframes recipe-spice {
+  0%, 100% { opacity: 0.25; transform: translate3d(0, 5px, 0) rotate(0); }
+  50% { opacity: 0.9; transform: translate3d(8px, -8px, 0) rotate(16deg); }
+}
+
+@media (max-width: 767px) {
+  .recipe-ingredient-1 { left: 0; top: 8%; }
+  .recipe-ingredient-2 { right: 0; top: 13%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -352,6 +449,13 @@ summary {
   }
 
   .coffee-art-steam {
+    animation: none !important;
+  }
+
+  .recipe-steam,
+  .recipe-ingredient,
+  .recipe-spice-particles::before,
+  .recipe-spice-particles::after {
     animation: none !important;
   }
 
