@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           {/* TODO(binyam): paste the existing privacy policy content here,
               replacing this placeholder, then retire the GitHub Pages copy. */}
           <div className="mt-10 rounded-[var(--radius-card)] border border-dashed border-berbere/40 bg-teff-panel p-8 text-injera-dim">
-            <p className="font-medium text-berbere">
+            <p className="font-medium text-berbere-text">
               Placeholder — content pending.
             </p>
             <p className="mt-2 text-[0.95rem]">

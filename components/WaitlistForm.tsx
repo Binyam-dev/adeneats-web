@@ -157,7 +157,7 @@ export default function WaitlistForm({ role }: { role: WaitlistRole }) {
             setStatus("idle");
             setMessage("");
           }}
-          className="mt-3 min-h-11 rounded-full text-sm font-semibold text-teal underline decoration-teal/45 underline-offset-4 hover:decoration-teal"
+          className="mt-3 min-h-11 rounded-full text-sm font-semibold text-teal-text underline decoration-teal-text/45 underline-offset-4 hover:decoration-teal-text"
         >
           Edit your information
         </button>
@@ -238,7 +238,7 @@ export default function WaitlistForm({ role }: { role: WaitlistRole }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-teal px-7 py-3 font-semibold text-injera shadow-[0_6px_24px_rgb(29_158_117_/_0.3)] transition-[transform,background-color,box-shadow] hover:-translate-y-0.5 hover:bg-teal-deep focus-visible:outline-offset-4 disabled:translate-y-0 disabled:cursor-wait disabled:opacity-65 sm:w-auto"
+        className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-teal px-7 py-3 font-bold text-injera shadow-[0_6px_24px_rgb(29_158_117_/_0.3)] transition-[transform,background-color,box-shadow] hover:-translate-y-0.5 hover:bg-teal-deep focus-visible:outline-offset-4 disabled:translate-y-0 disabled:cursor-wait disabled:opacity-65 sm:w-auto"
       >
         {isSubmitting && (
           <span

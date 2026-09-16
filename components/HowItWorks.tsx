@@ -29,7 +29,7 @@ export default function HowItWorks() {
     <section id="how" className="py-24">
       <Container>
         <Reveal>
-          <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal">
+          <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal-text">
             How it works
           </div>
           <h2 className="max-w-[20ch] text-display-lg font-display text-injera">

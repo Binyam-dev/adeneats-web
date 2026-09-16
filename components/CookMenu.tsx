@@ -16,7 +16,7 @@ export default function CookMenu({ cook }: { cook: CookListing }) {
               <span className="shrink-0 font-semibold text-gold">{formatPrice(item.price_cents)}</span>
             </div>
             {item.description && <p className="mt-2 text-sm leading-relaxed text-injera-dim">{item.description}</p>}
-            {item.fasting_friendly && <span className="mt-3 inline-block rounded-full bg-teal-tint px-3 py-1 text-xs font-semibold uppercase tracking-wider text-teal">Fasting friendly</span>}
+            {item.fasting_friendly && <span className="mt-3 inline-block rounded-full bg-teal-tint px-3 py-1 text-xs font-semibold uppercase tracking-wider text-teal-text">Fasting friendly</span>}
           </div>
           <button type="button" onClick={() => cart.add(item, cook)} className="mt-5 min-h-11 rounded-full bg-teal px-5 font-semibold text-injera transition-transform hover:-translate-y-0.5">
             Add to basket

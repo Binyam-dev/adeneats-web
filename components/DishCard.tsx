@@ -54,7 +54,7 @@ export default function DishCard({
             </div>
             <p className="text-[0.88rem] text-injera-dim">{dish.description}</p>
             {dish.fastingFriendly && (
-              <span className="mt-3 inline-block rounded-full border border-teal/50 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.1em] text-teal">
+              <span className="mt-3 inline-block rounded-full border border-teal/50 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.1em] text-teal-text">
                 Fasting friendly
               </span>
             )}

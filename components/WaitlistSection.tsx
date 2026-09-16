@@ -10,7 +10,7 @@ export default function WaitlistSection() {
       <section id="waitlist" className="py-24 text-center">
         <Container>
           <Reveal>
-            <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal">
+            <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal-text">
               Coming to your city
             </div>
             <h2 className="font-display text-display-lg text-injera">
@@ -27,7 +27,7 @@ export default function WaitlistSection() {
             </div>
             <p className="mt-4 text-sm text-injera-dim">
               Cooks are welcome too.{" "}
-              <a href="/cooks" className="text-teal underline underline-offset-2">
+              <a href="/cooks" className="text-teal-text underline underline-offset-2">
                 tell us your city
               </a>{" "}
               and we&apos;ll reach out first.
