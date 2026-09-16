@@ -90,7 +90,7 @@ export default function CookCard({
                     <span className="font-display italic text-teff">
                       {item.name}
                     </span>
-                    <span className="whitespace-nowrap text-[0.9rem] text-berbere">
+                    <span className="whitespace-nowrap text-[0.9rem] text-berbere-deep">
                       {formatPrice(item.price_cents)}
                     </span>
                   </div>

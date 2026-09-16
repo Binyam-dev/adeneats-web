@@ -20,7 +20,7 @@ export default function TermsPage() {
           <p className="mt-3 text-sm text-injera-dim">
             Last updated — July 27, 2026
           </p>
-          <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-berbere">
+          <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-berbere-text">
             Draft — pending legal review before launch
           </p>
 
@@ -56,7 +56,7 @@ export default function TermsPage() {
                 information from the waitlist at any time by emailing{" "}
                 <a
                   href="mailto:hello@adeneats.com"
-                  className="text-teal underline underline-offset-2"
+                  className="text-teal-text underline underline-offset-2"
                 >
                   hello@adeneats.com
                 </a>
@@ -73,7 +73,7 @@ export default function TermsPage() {
                 home-kitchen or cottage food requirements, basic food-handler
                 practices, and accurate labeling of ingredients and
                 allergens, as described on our{" "}
-                <a href="/cooks" className="text-teal underline underline-offset-2">
+                <a href="/cooks" className="text-teal-text underline underline-offset-2">
                   Cook with Aden
                 </a>{" "}
                 page. Aden&apos;s review process confirms a baseline before a
@@ -149,7 +149,7 @@ export default function TermsPage() {
                 Questions about these terms? Email{" "}
                 <a
                   href="mailto:hello@adeneats.com"
-                  className="text-teal underline underline-offset-2"
+                  className="text-teal-text underline underline-offset-2"
                 >
                   hello@adeneats.com
                 </a>

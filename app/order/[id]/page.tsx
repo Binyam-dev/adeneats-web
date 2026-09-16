@@ -57,7 +57,7 @@ export default async function CookProfilePage({
         <section className="relative overflow-hidden border-b border-border py-16 sm:py-24">
           <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_75%_30%,rgb(29_158_117_/_0.18),transparent_45%)]" />
           <Container className="relative">
-            <Link href="/order" className="inline-flex min-h-11 items-center text-sm font-semibold text-teal">← Back to all cooks</Link>
+            <Link href="/order" className="inline-flex min-h-11 items-center text-sm font-semibold text-teal-text">← Back to all cooks</Link>
             <div className="mt-8 grid items-center gap-10 md:grid-cols-[15rem_1fr]">
               <div className="relative aspect-square overflow-hidden rounded-full border-8 border-gold/15 bg-[linear-gradient(135deg,var(--color-teal-deep),var(--color-berbere-deep))] shadow-2xl">
                 {cook.photo_url ? (
@@ -76,7 +76,7 @@ export default async function CookProfilePage({
         </section>
         <section className="py-20">
           <Container>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal">Today&apos;s menu</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-text">Today&apos;s menu</p>
             <h2 className="mt-3 mb-8 font-display text-display-lg text-injera">Made in this home kitchen.</h2>
             {cook.menu_items.length ? (
               <CookMenu cook={cook} />

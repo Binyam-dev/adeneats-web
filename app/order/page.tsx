@@ -34,7 +34,7 @@ export default async function OrderPage() {
         <section className="py-20 sm:py-24">
           <Container>
             <Reveal>
-              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal">
+              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal-text">
                 Order
               </div>
               <h1 className="max-w-[20ch] text-hero font-display text-injera sm:text-[3.4rem]">

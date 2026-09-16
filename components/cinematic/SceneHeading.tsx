@@ -14,7 +14,7 @@ export default function SceneHeading({
   const light = theme === "light";
   return (
     <div className="max-w-2xl">
-      <div className={`flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] ${light ? "text-berbere" : "text-gold"}`}>
+      <div className={`flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] ${light ? "text-berbere-text" : "text-gold"}`}>
         <span className={`font-display text-2xl ${light ? "text-teff/35" : "text-injera/35"}`}>{chapter}</span>
         {eyebrow}
       </div>

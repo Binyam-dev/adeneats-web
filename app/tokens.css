@@ -15,7 +15,9 @@
   --color-injera: #f5ebdc;      /* injera cream — primary text on dark */
   --color-teal: #b94b2c;        /* warm clay — retained token name for compatibility */
   --color-teal-deep: #7d2d1b;
+  --color-teal-text: #c76f56;   /* clay, lightened for 4.5:1 on teff — use for small/body text instead of --color-teal */
   --color-berbere: #c43b1e;     /* berbere red-orange — spice/heat accent, dish photo treatments */
+  --color-berbere-text: #cf624b; /* berbere, lightened for 4.5:1 on teff — use for small/body text instead of --color-berbere */
   --color-error: #ff8f73;        /* accessible error text on teff surfaces */
   --color-gold: #e2a93b;        /* niter kibbeh gold — tibeb pattern, fidel accents, cook CTA */
 

@@ -70,7 +70,7 @@ export default function CulturalStory() {
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_11_8_/_0.08),rgb(17_11_8_/_0.94)_86%)]" />
                 <div className="absolute inset-x-7 bottom-7 z-10">
-                  <span className="font-ethiopic text-lg text-teal">እንጀራ</span>
+                  <span className="font-ethiopic text-lg text-teal-text">እንጀራ</span>
                   <h3 className="mt-3 font-display text-2xl text-injera">
                     Injera holds the table together.
                   </h3>

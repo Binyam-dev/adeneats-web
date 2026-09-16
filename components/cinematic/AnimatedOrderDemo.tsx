@@ -16,7 +16,7 @@ export default function AnimatedOrderDemo() {
         <SceneHeading
           chapter="04"
           eyebrow="The future experience"
-          title={<>From a story on your screen to <em className="text-berbere">dinner at home.</em></>}
+          title={<>From a story on your screen to <em className="text-berbere-text">dinner at home.</em></>}
           body="This interface is a clearly labeled product demonstration. Live meals, prices, ratings, availability, and ordering will arrive with the app."
           theme="light"
         />
@@ -68,7 +68,7 @@ export default function AnimatedOrderDemo() {
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-berbere">Pickup or delivery</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-berbere-text">Pickup or delivery</p>
             <h3 className="mt-4 max-w-[14ch] font-display text-5xl leading-none sm:text-6xl">
               The meal stays central at every step.
             </h3>

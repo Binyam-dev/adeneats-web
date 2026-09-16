@@ -75,7 +75,7 @@ export default function OrderMarketplace({ cooks }: { cooks: CookListing[] }) {
                   <p className="text-xs uppercase tracking-[0.15em] text-gold">{[cook.city, cook.cuisine_specialty].filter(Boolean).join(" · ")}</p>
                   <h2 className="mt-2 font-display text-3xl text-injera">{cook.name}</h2>
                   {cook.bio && <p className="mt-3 line-clamp-3 text-sm text-injera-dim">{cook.bio}</p>}
-                  <Link href={`/order/${cook.id}`} className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-teal">
+                  <Link href={`/order/${cook.id}`} className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-teal-text">
                     Meet this cook <span aria-hidden="true" className="ml-2">→</span>
                   </Link>
                 </div>
@@ -86,13 +86,13 @@ export default function OrderMarketplace({ cooks }: { cooks: CookListing[] }) {
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
                         <h3 className="font-display text-lg text-injera">{item.name}</h3>
-                        {item.fasting_friendly && <span className="rounded-full bg-teal-tint px-2 py-1 text-[0.62rem] font-semibold uppercase tracking-wider text-teal">Fasting</span>}
+                        {item.fasting_friendly && <span className="rounded-full bg-teal-tint px-2 py-1 text-[0.62rem] font-semibold uppercase tracking-wider text-teal-text">Fasting</span>}
                       </div>
                       {item.description && <p className="mt-1 text-sm text-injera-dim">{item.description}</p>}
                     </div>
                     <div className="shrink-0 text-right">
                       <div className="mb-2 text-sm font-semibold text-gold">{formatPrice(item.price_cents)}</div>
-                      <button type="button" onClick={() => cart.add(item, cook)} className="min-h-11 rounded-full border border-teal/50 px-4 text-sm font-semibold text-teal transition-colors hover:bg-teal hover:text-injera">
+                      <button type="button" onClick={() => cart.add(item, cook)} className="min-h-11 rounded-full border border-teal/50 px-4 text-sm font-semibold text-teal-text transition-colors hover:bg-teal hover:text-injera">
                         Add
                       </button>
                     </div>

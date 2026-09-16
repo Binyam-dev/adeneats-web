@@ -114,7 +114,7 @@ export default function CooksPage() {
         <section className="py-20">
           <Container>
             <Reveal>
-              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal">
+              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal-text">
                 How vetting works
               </div>
               <h2 className="text-display-lg font-display text-injera">
@@ -152,7 +152,7 @@ export default function CooksPage() {
         <section className="py-20">
           <Container>
             <Reveal>
-              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-berbere">
+              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-berbere-text">
                 Food safety
               </div>
               <h2 className="max-w-[26ch] text-display-lg font-display text-injera">
@@ -183,7 +183,7 @@ export default function CooksPage() {
         <section className="py-20">
           <Container>
             <Reveal>
-              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal">
+              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-teal-text">
                 FAQ
               </div>
               <h2 className="text-display-lg font-display text-injera">

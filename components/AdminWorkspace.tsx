@@ -131,7 +131,7 @@ export default function AdminWorkspace() {
                 {listing.menu_items.map((item) => (
                   <li key={item.id} className="flex items-center justify-between gap-4 py-3 text-sm">
                     <span className="text-injera">{item.name} <span className="text-injera-dim">· {formatPrice(item.price_cents)}</span></span>
-                    <button type="button" onClick={async () => { await adminFetch(session, "/api/admin/listings", { method: "PATCH", body: JSON.stringify({ entity: "menuItem", id: item.id, isAvailable: item.is_available === false }) }); await loadListings(); }} className="min-h-11 text-teal">
+                    <button type="button" onClick={async () => { await adminFetch(session, "/api/admin/listings", { method: "PATCH", body: JSON.stringify({ entity: "menuItem", id: item.id, isAvailable: item.is_available === false }) }); await loadListings(); }} className="min-h-11 text-teal-text">
                       {item.is_available === false ? "Make available" : "Pause"}
                     </button>
                   </li>
@@ -203,13 +203,13 @@ function WaitlistDirectory({ entries, state }: { entries: WaitlistEntry[]; state
                 <tr key={entry.id}>
                   <td className="px-5 py-4">
                     <span className="block font-medium text-injera">{entry.name || "Customer"}</span>
-                    <a className="text-teal hover:underline" href={`mailto:${entry.email}`}>{entry.email}</a>
+                    <a className="text-teal-text hover:underline" href={`mailto:${entry.email}`}>{entry.email}</a>
                   </td>
                   <td className="px-5 py-4 text-injera-dim">
                     {[entry.city, entry.region].filter(Boolean).join(", ") || "Not provided"}
                   </td>
                   <td className="px-5 py-4">
-                    <span className="rounded-full bg-teal-tint px-3 py-1 text-xs font-semibold capitalize text-teal">{entry.role}</span>
+                    <span className="rounded-full bg-teal-tint px-3 py-1 text-xs font-semibold capitalize text-teal-text">{entry.role}</span>
                     {entry.cuisine_specialty && <span className="ml-2 text-injera-dim">{entry.cuisine_specialty}</span>}
                   </td>
                   <td className="px-5 py-4 text-injera-dim">
@@ -259,7 +259,7 @@ function CreateMenuItem({ session, cookId, onCreated }: { session: Session; cook
       <input name="price" required min="0" step="0.01" type="number" placeholder="Price" aria-label="Price" className="min-h-11 rounded-xl border border-border bg-teff px-3 text-injera" />
       <label className="flex min-h-11 items-center gap-2 text-sm text-injera-dim"><input name="fasting" type="checkbox" /> Fasting</label>
       <input name="description" placeholder="Description" aria-label="Description" className="min-h-11 rounded-xl border border-border bg-teff px-3 text-injera sm:col-span-2" />
-      <button className="min-h-11 rounded-full border border-teal px-4 text-sm font-semibold text-teal">Add dish</button>
+      <button className="min-h-11 rounded-full border border-teal px-4 text-sm font-semibold text-teal-text">Add dish</button>
     </form>
   );
 }
