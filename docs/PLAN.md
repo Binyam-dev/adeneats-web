@@ -9,3 +9,5 @@ This plan is newly added: the repository's AGENTS.md references a plan, but none
 - Preserve all existing home-page scenes, waitlist, ordering redirects and release configuration.
 - Test pantry selection, sequence, simmer, serving, replay, mobile overflow, reduced motion and isolation. Run existing unit, type and lint checks. Record blocked checks honestly.
 - Do not publish, deploy, push, create rewards, or alter financial terms. A native React state rewrite, additional dishes, culinary approval and server-verified rewards remain separate future work.
+
+Preview-build repair: allow data-free unavailable UI only for an explicitly identified, unconfigured Vercel preview. Preserve strict production/development configuration checks and existing order redirect; do not borrow production/staging credentials. Verify complete preview build before updating the same draft PR.

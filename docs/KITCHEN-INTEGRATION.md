@@ -31,3 +31,9 @@ Future financial rewards must be a separately approved feature with server-valid
 ## Applying the review patch
 
 Use a fresh branch based on the base commit, inspect the patch, then `git apply --check adeneats-kitchen-integration.patch` followed by `git apply adeneats-kitchen-integration.patch`. Do not apply over other edits without reviewing conflicts. This handoff does not authorize a push or deployment. No remote write has been performed.
+
+## Preview build follow-up
+
+Vercel logs confirmed the same missing public Supabase configuration failure as the local build. A narrow code-only fallback now applies **only** when `VERCEL_ENV=preview` and either public Supabase setting is absent. Both order routes and cook metadata avoid database construction in that case and show explicit unavailability; there are no fabricated cooks or borrowed credentials. Configured previews and production/development retain the existing behavior. The existing `/order` redirect is unchanged.
+
+Verification after the fix: 16/16 unit tests, lint, typecheck and `VERCEL_ENV=preview npm run build` pass; all 16 static pages generated, including `/play`. New tests cover 36 environment/configuration combinations. Real-browser QA remains pending. This is still a feature in the existing AdenEats website and hosting project, not a new product or service.
