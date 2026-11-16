@@ -37,3 +37,19 @@ Use a fresh branch based on the base commit, inspect the patch, then `git apply 
 Vercel logs confirmed the same missing public Supabase configuration failure as the local build. A narrow code-only fallback now applies **only** when `VERCEL_ENV=preview` and either public Supabase setting is absent. Both order routes and cook metadata avoid database construction in that case and show explicit unavailability; there are no fabricated cooks or borrowed credentials. Configured previews and production/development retain the existing behavior. The existing `/order` redirect is unchanged.
 
 Verification after the fix: 16/16 unit tests, lint, typecheck and `VERCEL_ENV=preview npm run build` pass; all 16 static pages generated, including `/play`. New tests cover 36 environment/configuration combinations. Real-browser QA remains pending. This is still a feature in the existing AdenEats website and hosting project, not a new product or service.
+
+## Challenge revision (user feedback)
+
+- Three selectable dishes: misir and shiro beginner, doro advanced. Doro has nine ingredients/eight sequence steps, five stirs, a narrower acceptable heat range and three serving portions.
+- Correct ingredient tiles animate into the pot using layout-derived flight paths. Pot color/toppings reflect the selected dish; ladling animates toward an illustrated injera plate. Reduced motion suppresses flights; restarting removes in-flight elements.
+- Two total wrong choices across pantry, cooking sequence, heat and serving reset the same dish: empty selection, zero score, first stage and fresh two chances. A repeated wrong tap counts again; completed/disabled correct choices cannot duplicate points. Recipe or mode change explicitly starts over.
+- Final stage requires laying injera, ladling the dish-specific portion count and pressing Serve. There is no checkout integration or monetary value.
+- DOM tests exercise all three complete dishes, resets at every stage, life carryover, duplicate actions, phase gates, recipe/mode switches and flight cleanup/reduced motion. The browser harness now covers mobile completion and 320/390/768/1440 widths, but real-browser execution is still pending.
+
+### Recipe editorial references
+
+These are simplified game cards, not canonical recipes or food-safety instructions. Family/region variations are explicitly acknowledged. No real cooking times/temperatures are inferred from taps; the doro stove stage explicitly warns that it cannot determine real chicken safety. A cook should review before live publication.
+
+- [Delina / Nazareth's shiro recipe](https://www.delinaonline.com/shiro-wot-recipe): onion base and water followed by gradually incorporated legume flour and gentle stirring. Our short card uses a seasoned flour blend and omits some optional/variable additions.
+- [Ethiopian Spices recipes](https://ethiopianspices.com/pages/recipes): red lentil stew ingredient family (onion, oil, garlic, berbere, lentils, water), plus gradual shiro incorporation. Their page also documents a turmeric lentil variation; the game chooses a berbere version.
+- [University of Florida Center for African Studies, Doro Wot](https://africa.ufl.edu/doro-wot-%E1%8B%B6%E1%88%AE-%E1%8B%8D%E1%8C%A5-with-kyle-fahey/): layered onions, spice, chicken, clarified butter, finishing spice and boiled eggs. The game condenses the sequence rather than reproducing a complete cooking recipe.

@@ -11,3 +11,7 @@ This plan is newly added: the repository's AGENTS.md references a plan, but none
 - Do not publish, deploy, push, create rewards, or alter financial terms. A native React state rewrite, additional dishes, culinary approval and server-verified rewards remain separate future work.
 
 Preview-build repair: allow data-free unavailable UI only for an explicitly identified, unconfigured Vercel preview. Preserve strict production/development configuration checks and existing order redirect; do not borrow production/staging credentials. Verify complete preview build before updating the same draft PR.
+
+## User-directed challenge revision
+
+Supersedes the initial single-dish/easy-scoring design: animate ingredients into the pot; allow two mistakes total across each dish before resetting all progress; add beginner misir wot, retain shiro, add advanced doro wot; continue through injera placement, ladling and final serving. Maintain responsive touch controls, reduced-motion support, no redeemable rewards and no production merge. Remain inside the existing AdenEats website/project.

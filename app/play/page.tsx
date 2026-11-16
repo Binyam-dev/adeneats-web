@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Aden Kitchen Challenge",
-  description: "Explore Ethiopian shiro in a playful practice kitchen. Gather ingredients, build flavor, and serve with injera.",
+  description: "Take on misir, shiro and doro wot. Two chances to gather ingredients, cook, plate and serve in the Aden Eats practice kitchen.",
   robots: { index: false, follow: false },
 };
 
@@ -22,7 +22,7 @@ export default function KitchenPage() {
         <span className="text-xs text-injera/65">Practice only · No redeemable rewards</span>
       </nav>
       <iframe
-        title="Aden Kitchen: interactive shiro cooking challenge"
+        title="Aden Eats Kitchen Challenge: misir, shiro and doro wot"
         src="/kitchen/index.html"
         sandbox="allow-scripts"
         referrerPolicy="no-referrer"

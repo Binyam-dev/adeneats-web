@@ -6,8 +6,8 @@ export default function KitchenChallengeInvite() {
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-7 md:flex-row md:items-center">
         <div className="max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">The practice kitchen</p>
-          <h2 id="kitchen-invite-title" className="mt-3 font-display text-4xl leading-tight text-injera sm:text-5xl">Your first pot of shiro.</h2>
-          <p className="mt-4 text-base leading-relaxed text-injera/70">Pick your ingredients, build the flavor, and serve your virtual stew with injera. Discover Ethiopian food one delicious decision at a time.</p>
+          <h2 id="kitchen-invite-title" className="mt-3 font-display text-4xl leading-tight text-injera sm:text-5xl">Three dishes. Two chances.</h2>
+          <p className="mt-4 text-base leading-relaxed text-injera/70">Start with misir or shiro wot, then take on advanced doro wot. Send ingredients into the pot, cook, plate and serve. Two mistakes restart your dish.</p>
           <p className="mt-3 text-xs text-injera/50">Practice points only. Food-order discounts are not available in this prototype.</p>
         </div>
         <Link href="/play" className="inline-flex min-h-12 shrink-0 items-center rounded-full bg-gold px-7 py-4 text-sm font-bold text-teff transition hover:bg-injera focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
