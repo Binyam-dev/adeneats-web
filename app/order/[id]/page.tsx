@@ -1,3 +1,5 @@
+import { isUnconfiguredOrderPreview } from "@/lib/order-preview";
+import OrderPreviewUnavailable from "@/components/OrderPreviewUnavailable";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +18,9 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  if (isUnconfiguredOrderPreview(process.env)) {
+    return { title: "Menus unavailable in preview", robots: { index: false, follow: false } };
+  }
   const { id } = await params;
   const supabase = getServerSupabase();
   const { data } = await supabase
@@ -35,6 +40,7 @@ export default async function CookProfilePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  if (isUnconfiguredOrderPreview(process.env)) return <OrderPreviewUnavailable />;
   const appStoreUrl = process.env.APP_STORE_URL;
   const supabase = getServerSupabase();
   const { data } = await supabase

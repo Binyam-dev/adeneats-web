@@ -1,3 +1,5 @@
+import { isUnconfiguredOrderPreview } from "@/lib/order-preview";
+import OrderPreviewUnavailable from "@/components/OrderPreviewUnavailable";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
@@ -17,6 +19,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function OrderPage() {
+  if (isUnconfiguredOrderPreview(process.env)) return <OrderPreviewUnavailable />;
   const appStoreUrl = process.env.APP_STORE_URL;
   const supabase = getServerSupabase();
   const { data: cooks, error } = await supabase

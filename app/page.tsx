@@ -1,3 +1,4 @@
+import KitchenChallengeInvite from "@/components/KitchenChallengeInvite";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
@@ -48,6 +49,7 @@ export default function Home() {
         <AnimatedOrderDemo />
         <HumanPayoffScene />
         <RecipeDiscovery />
+        <KitchenChallengeInvite />
         <CulturalStory />
         <CoffeeCeremony />
         <CommunityCTA />
